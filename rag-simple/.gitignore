@@ -1,0 +1,13 @@
+.idea/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+chroma_db/
+**/chroma_db/
+*.sqlite
+*.sqlite3
+*.db
+.pytest_cache/

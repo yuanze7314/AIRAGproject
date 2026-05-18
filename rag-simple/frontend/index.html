@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>智能客服回答</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">RAG Customer Service Copilot</p>
+          <h1 id="page-title">智能客服回答</h1>
+          <p class="lede">面向企业制度、售后政策和内部知识库的智能客服项目：先检索可信资料，再生成可追溯、可落地的客服回复。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#demo">体验客服问答</a>
+            <a class="button ghost" href="#workflow">查看处理流程</a>
+          </div>
+        </div>
+        <div class="status-panel" aria-label="项目运行状态">
+          <div>
+            <span class="status-dot"></span>
+            <strong>客服知识中枢</strong>
+            <p>知识入库、意图识别、相似检索、回复生成、引用溯源</p>
+          </div>
+          <div class="hub-features" aria-label="客服知识中枢能力">
+            <article>
+              <span>01</span>
+              <h2>客服自动应答</h2>
+              <p>面向用户问题生成标准、友好、可追溯的服务回复。</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h2>知识库检索</h2>
+              <p>通过向量相似度召回政策、流程和 FAQ 片段，降低误答率。</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h2>人工辅助</h2>
+              <p>展示置信度、参考来源和建议动作，适合作为客服坐席助手。</p>
+            </article>
+          </div>
+          <dl class="metrics">
+            <div><dt>Channel</dt><dd>Web Chat</dd></div>
+            <div><dt>Vector DB</dt><dd>Chroma</dd></div>
+            <div><dt>LLM</dt><dd>DeepSeek</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="workflow" class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Workflow</p>
+          <h2>客服处理流程</h2>
+        </div>
+        <ol class="timeline">
+          <li><strong>接收咨询</strong><span>客户输入售后、政策、报销或流程类问题。</span></li>
+          <li><strong>检索知识</strong><span>从本地知识库召回最相关的制度和 FAQ 片段。</span></li>
+          <li><strong>生成回复</strong><span>结合上下文生成自然、准确、可执行的客服话术。</span></li>
+          <li><strong>沉淀工单</strong><span>标注来源、置信度和建议动作，方便人工复核。</span></li>
+        </ol>
+      </section>
+
+      <section id="demo" class="demo-layout" aria-labelledby="demo-title">
+        <div class="demo-input">
+          <div class="section-heading compact">
+            <p class="eyebrow">Demo</p>
+          <h2 id="demo-title">客户咨询模拟</h2>
+          </div>
+          <label class="upload-box" for="document-file">
+            <input id="document-file" type="file" accept=".md,.txt,.pdf,.doc,.docx" />
+            <span>导入客服知识文档</span>
+            <small id="file-name">当前演示默认使用企业制度知识库</small>
+          </label>
+          <label class="question-label" for="question">客户问题</label>
+          <textarea id="question" rows="5">客户问：我入职第一年有多少天年假？</textarea>
+          <div class="quick-questions" aria-label="快捷问题">
+            <button type="button" data-question="客户问：去上海出差，住宿最多能报销多少？">差旅报销</button>
+            <button type="button" data-question="客户问：新员工试用期是多久？">试用期</button>
+            <button type="button" data-question="客户问：一年有多少天带薪病假？">病假</button>
+          </div>
+          <button id="ask-button" class="button primary full" type="button">生成客服回复</button>
+        </div>
+
+        <aside class="answer-panel" aria-live="polite">
+          <div class="answer-header">
+            <div>
+              <p class="eyebrow">Service Reply</p>
+              <h2>客服回复</h2>
+            </div>
+            <span id="mode-badge">Mock</span>
+          </div>
+          <div id="answer" class="answer-body">
+            点击生成后，这里会展示客服回复、命中的知识来源、当前接口模式和建议处理动作。
+          </div>
+          <div class="agent-handoff">
+            <div>
+              <strong>建议动作</strong>
+              <p id="next-action">命中知识库后，可直接发送给客户；低置信度问题建议转人工。</p>
+            </div>
+            <div>
+              <strong>置信度</strong>
+              <p id="confidence">待生成</p>
+            </div>
+          </div>
+          <div class="sources">
+            <strong>知识引用</strong>
+            <ul id="sources">
+              <li>employee_handbook.md</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="scenario-section" aria-label="项目亮点和适用场景">
+        <div class="section-heading">
+          <p class="eyebrow">Highlights</p>
+          <h2>项目亮点与适用场景</h2>
+        </div>
+        <div class="scenario-grid">
+          <article><h3>售前咨询</h3><p>快速解释服务范围、办理流程和常见政策。</p></article>
+          <article><h3>售后支持</h3><p>结合内部知识库输出标准化排查建议和处理口径。</p></article>
+          <article><h3>坐席辅助</h3><p>为人工客服提供参考来源、建议动作和回复草稿。</p></article>
+        </div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

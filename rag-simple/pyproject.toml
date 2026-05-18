@@ -1,0 +1,30 @@
+[project]
+name = "rag-simple"
+version = "0.1.0"
+description = "A RAG-powered intelligent customer service demo with a local knowledge base."
+authors = [
+    { name = "woniu365", email = "xxx@woniu365.net" }
+]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "langchain (>=0.3.27,<0.4.0)",
+    "langchain-community (>=0.3.29,<0.4.0)",
+    "langchain-huggingface (>=0.3.1,<0.4.0)",
+    "langchain-chroma (>=0.2.6,<0.3.0)",
+    "langchain-openai (>=0.3.33,<0.4.0)",
+    "sentence-transformers (>=5.1.0,<6.0.0)",
+    "chroma (>=0.2.0,<0.3.0)",
+]
+
+[tool.poetry]
+packages = [{ include = "rag_simple", from = "src" }]
+
+[[tool.poetry.source]]
+name = "tuna"  # 源的名称
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

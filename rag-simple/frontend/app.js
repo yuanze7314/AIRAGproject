@@ -87,15 +87,10 @@ async function askQuestion() {
 
 function renderAnswer(data) {
   answerEl.textContent = data.answer;
-  sourcesEl.innerHTML = "";
-  data.sources.forEach((source) => {
-    const li = document.createElement("li");
-    li.textContent = source;
-    sourcesEl.appendChild(li);
-  });
+  sourcesEl.textContent = data.sources.join(" / ");
   modeBadge.textContent = data.mode || "RAG";
   nextActionEl.textContent = data.action || "建议人工复核后发送。";
-  confidenceEl.textContent = data.confidence || "中";
+  confidenceEl.textContent = data.confidence === "高" ? "92%" : data.confidence === "中" ? "76%" : "48%";
 }
 
 document.querySelectorAll("[data-question]").forEach((button) => {

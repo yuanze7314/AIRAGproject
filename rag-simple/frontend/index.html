@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>智能客服 Copilot</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260524-right-panel-clean" />
   </head>
   <body>
     <div class="app-shell">
@@ -17,33 +17,23 @@
           </div>
         </div>
 
-        <button class="new-chat" type="button">
+        <button id="new-chat-button" class="new-chat" type="button">
           <span aria-hidden="true">+</span>
           新建会话
         </button>
 
         <nav class="nav-list" aria-label="功能导航">
-          <a class="active" href="#chat">智能问答</a>
-          <a href="#knowledge">知识库</a>
-          <a href="#ticket">工单中心</a>
-          <a href="#history">回复记录</a>
-          <a href="#dashboard">数据看板</a>
-          <a href="#settings">设置</a>
+          <a class="active" href="#chat" data-view="chat">智能问答</a>
+          <a href="#knowledge" data-view="knowledge">知识库</a>
+          <a href="#settings" data-view="settings">设置</a>
         </nav>
 
         <section class="recent" aria-labelledby="recent-title">
           <div class="section-row">
             <h2 id="recent-title">最近会话</h2>
-            <button type="button">更多</button>
+            <button id="more-sessions-button" type="button" aria-expanded="false">更多</button>
           </div>
-          <button class="recent-item active" type="button">
-            <span>我入职第一年有多少天年假？</span>
-            <small>13:45</small>
-          </button>
-          <button class="recent-item" type="button">
-            <span>试用期工资如何计算？</span>
-            <small>昨天</small>
-          </button>
+          <div id="session-list" class="session-list"></div>
         </section>
 
         <footer class="agent-profile">
@@ -62,51 +52,42 @@
             <h1>知识库智能客服</h1>
             <p>基于 RAG 的知识检索、答案生成与工单沉淀流程</p>
           </div>
-          <div class="toolbar" aria-label="会话状态">
-            <button type="button">Web Chat</button>
-            <button class="bell" aria-label="通知" type="button">
-              <span>3</span>
-            </button>
-            <button class="online" type="button">
-              <i aria-hidden="true"></i>
-              在线
-            </button>
-          </div>
         </header>
 
-        <section class="conversation" aria-label="客服对话">
-          <div class="user-row">
-            <div class="user-message">我入职第一年有多少天年假？</div>
-            <div class="user-avatar" aria-label="用户头像"></div>
+        <section id="conversation" class="conversation" aria-label="客服对话" aria-live="polite"></section>
+
+        <section id="knowledge-panel" class="knowledge-panel" aria-labelledby="knowledge-title" hidden>
+          <div class="knowledge-header">
+            <div>
+              <h2 id="knowledge-title">知识库管理</h2>
+              <p>上传 PDF、Markdown 或文本文件，管理当前客服问答可检索的知识来源。</p>
+            </div>
+            <label class="knowledge-upload" for="knowledge-file">
+              上传新 PDF
+              <input id="knowledge-file" type="file" accept=".pdf,.txt,.md" />
+            </label>
           </div>
 
-          <article class="assistant-card" aria-live="polite">
-            <div class="assistant-meta">
-              <div class="mini-bot" aria-hidden="true">AI</div>
-              <span>AI Agent</span>
-              <time>13:45</time>
-            </div>
+          <div class="knowledge-summary">
+            <article>
+              <span>文档数量</span>
+              <strong id="doc-count">0</strong>
+            </article>
+            <article>
+              <span>知识片段</span>
+              <strong id="chunk-count">0</strong>
+            </article>
+            <article>
+              <span>当前状态</span>
+              <strong id="knowledge-state">默认库</strong>
+            </article>
+          </div>
 
-            <div class="reasoning-card">
-              <button class="reasoning-title" type="button" aria-expanded="true">
-                深度思考 · 检索过程
-                <span aria-hidden="true">⌃</span>
-              </button>
-              <p>已理解问题意图：年假天数政策咨询</p>
-              <ul>
-                <li>在知识库中检索相关内容...</li>
-                <li>命中 2 个相关文档，覆盖相似条款片段</li>
-                <li>基于检索结果生成回复</li>
-              </ul>
-            </div>
-
-            <div id="answer" class="answer-text">
-              根据《员工手册》相关规定，您入职第一年可享受 5 天年假。
-
-适用对象：入职满 1 年（含）以上的正式员工。
-说明：年假天数按自然年累计计算，未休完的年假可按公司政策结转。
-            </div>
-          </article>
+          <div class="knowledge-list-header">
+            <h3>现有文档</h3>
+            <button id="refresh-documents" type="button">刷新</button>
+          </div>
+          <div id="document-list" class="document-list"></div>
         </section>
 
         <section class="composer" aria-label="发送消息">
@@ -124,11 +105,11 @@
             <label class="sr-only" for="question">给 AI Agent 发送消息</label>
             <textarea id="question" rows="3" placeholder="给 AI Agent 发送消息...">客户问：我入职第一年有多少天年假？</textarea>
             <div class="composer-actions">
-              <label class="upload-icon" for="document-file" aria-label="上传知识文档">
-                <input id="document-file" type="file" accept=".md,.txt,.pdf,.doc,.docx" />
-                附件
+              <label class="upload-button" for="document-file">
+                上传PDF
+                <input id="document-file" type="file" accept=".pdf,.txt,.md" />
               </label>
-              <span id="file-name">当前使用 employee_handbook.md</span>
+              <span id="upload-status">默认知识库：employee_handbook.md</span>
               <button id="ask-button" class="send-button" type="button" aria-label="发送消息">发送</button>
             </div>
           </div>
@@ -152,9 +133,17 @@
 
         <section class="insight-grid" aria-label="回答质量">
           <div class="metric-card">
-            <strong>置信度</strong>
+            <div class="metric-title">
+              <strong>置信度</strong>
+              <button class="info-button" type="button" aria-label="查看置信度说明">
+                i
+                <span class="confidence-tooltip" role="tooltip">
+                  该置信度为系统估算值，主要参考知识库命中情况、问题相关性、上下文完整度和回答生成一致性。它不代表事实绝对正确，涉及制度解释、薪资、病假、社保等关键问题时，建议结合公司正式文件或人工确认。
+                </span>
+              </button>
+            </div>
             <p id="confidence">92%</p>
-            <small>较高</small>
+            <small id="confidence-level">较高</small>
           </div>
           <div class="metric-card">
             <strong>建议动作</strong>
@@ -163,27 +152,9 @@
           </div>
         </section>
 
-        <section class="panel">
-          <h2>技术信息</h2>
-          <dl class="tech-list">
-            <div><dt>Channel</dt><dd>Web Chat</dd></div>
-            <div><dt>Vector DB</dt><dd>Chroma</dd></div>
-            <div><dt>LLM</dt><dd>DeepSeek</dd></div>
-          </dl>
-        </section>
-
-        <section class="panel flow-panel">
-          <h2>处理流程</h2>
-          <ol>
-            <li><strong>接收咨询</strong><span>客户输入信息、意图，提炼问题</span></li>
-            <li><strong>检索知识</strong><span>在本地知识库召回制度和 FAQ 片段</span></li>
-            <li><strong>生成回复</strong><span>结合上下文生成准确、可执行的话术</span></li>
-            <li><strong>沉淀工单</strong><span>标注来源、置信度和建议动作</span></li>
-          </ol>
-        </section>
       </aside>
     </div>
 
-    <script src="./app.js"></script>
+    <script src="./app.js?v=20260524-right-panel-clean"></script>
   </body>
 </html>

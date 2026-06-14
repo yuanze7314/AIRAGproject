@@ -1,0 +1,44 @@
+[
+  {
+    "docId": "airbuds-pro-x-specs",
+    "title": "AirBuds Pro X 商品规格",
+    "category": "product_specs",
+    "keywords": ["AirBuds Pro X", "耳机", "蓝牙", "主动降噪", "续航", "保修", "规格", "参数"],
+    "content": "AirBuds Pro X 是当前 demo 唯一商品。它支持蓝牙 5.3、主动降噪、通透模式、入耳检测和触控操作；单次续航约 6 小时，配合充电盒总续航约 28 小时。Demo 口径为 12 个月有限保修，具体仍以商品详情页和订单快照为准。"
+  },
+  {
+    "docId": "airbuds-pro-x-package",
+    "title": "AirBuds Pro X 包装清单",
+    "category": "product_specs",
+    "keywords": ["包装", "清单", "配件", "耳塞", "充电线", "说明书"],
+    "content": "AirBuds Pro X 标准包装清单包括耳机本体、充电盒、USB-C 充电线、三组不同尺寸耳塞、快速指南和保修说明。若用户反馈缺少配件，需要核对订单版本、活动页面和开箱凭证，不得直接承诺补发。"
+  },
+  {
+    "docId": "airbuds-pro-x-delivery-time",
+    "title": "AirBuds Pro X 发货与送达时效",
+    "category": "delivery_time",
+    "keywords": ["发货", "送达", "配送", "多久", "到货", "时效"],
+    "content": "AirBuds Pro X demo 订单预计 48 小时内发货，发货后通常 1-3 天送达。实际时效会受收货地址、仓库、节假日和快递揽派影响，应提示用户以订单详情页展示为准。"
+  },
+  {
+    "docId": "airbuds-pro-x-logistics",
+    "title": "AirBuds Pro X 物流查询",
+    "category": "logistics_info",
+    "keywords": ["快递", "物流", "单号", "运单", "承运商", "查物流"],
+    "content": "AirBuds Pro X demo 物流承运商为顺丰速运，示例快递单号为 SF123456789CN，示例状态为运输中。真实业务中不能凭空编造单号；若没有命中订单信息，应引导用户查看订单详情页。"
+  },
+  {
+    "docId": "airbuds-pro-x-order-status",
+    "title": "AirBuds Pro X 订单基础信息",
+    "category": "order_info",
+    "keywords": ["订单", "状态", "付款", "地址", "取消", "订单详情"],
+    "content": "AirBuds Pro X 普通订单问答只回答订单状态、发货状态、快递公司、快递单号等已展示信息。改地址、取消订单、退款、退货、赔付、补发等动作不在普通问答中处理，需要进入售后流程或转人工。"
+  },
+  {
+    "docId": "airbuds-pro-x-answer-style",
+    "title": "AirBuds Pro X 普通客服口径",
+    "category": "general_style",
+    "keywords": ["普通客服", "回答", "口径", "以页面为准"],
+    "content": "普通客服回答应简洁、直接，说明信息来源，避免承诺订单一定送达、一定发货或保证参数绝对准确。涉及退款、退货、赔付、补发、质量责任时，必须移交售后分支或人工。"
+  }
+]

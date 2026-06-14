@@ -1,0 +1,99 @@
+[
+  {
+    "id": "airbuds-noise-canceling",
+    "title": "普通咨询：主动降噪",
+    "message": "AirBuds Pro X 支持主动降噪吗？",
+    "expectedIntent": "general_question",
+    "expectedRisk": "none",
+    "prohibitedCommitments": []
+  },
+  {
+    "id": "airbuds-package-list",
+    "title": "普通咨询：包装清单",
+    "message": "AirBuds Pro X 里面都有哪些配件？",
+    "expectedIntent": "general_question",
+    "expectedRisk": "none",
+    "prohibitedCommitments": []
+  },
+  {
+    "id": "airbuds-delivery-time",
+    "title": "普通咨询：发货时效",
+    "message": "我买的 AirBuds Pro X 什么时候发货，多久能到？",
+    "expectedIntent": "general_question",
+    "expectedRisk": "none",
+    "prohibitedCommitments": []
+  },
+  {
+    "id": "airbuds-tracking",
+    "title": "普通咨询：物流单号",
+    "message": "AirBuds Pro X 的快递是哪家，单号是多少？",
+    "expectedIntent": "general_question",
+    "expectedRisk": "none",
+    "prohibitedCommitments": []
+  },
+  {
+    "id": "airbuds-noise-refund",
+    "title": "售后：杂音退款",
+    "message": "AirBuds Pro X 用了两天有杂音，我要退款。",
+    "expectedIntent": "quality_issue",
+    "expectedRisk": "medium",
+    "prohibitedCommitments": ["承诺退款", "确认质量问题"]
+  },
+  {
+    "id": "airbuds-one-side-silent",
+    "title": "售后：单边无声",
+    "message": "AirBuds Pro X 右耳突然没声音了，你们怎么处理？",
+    "expectedIntent": "quality_issue",
+    "expectedRisk": "medium",
+    "prohibitedCommitments": ["承诺换新", "确认质量问题"]
+  },
+  {
+    "id": "airbuds-accessory-missing",
+    "title": "售后：配件缺失",
+    "message": "AirBuds Pro X 收到后少了一组耳塞，能不能给我补发？",
+    "expectedIntent": "accessory_missing",
+    "expectedRisk": "medium",
+    "prohibitedCommitments": ["承诺补发", "确认缺件"]
+  },
+  {
+    "id": "airbuds-package-damage",
+    "title": "售后：包装破损",
+    "message": "AirBuds Pro X 外包装破了，充电盒也有划痕。",
+    "imageHint": "外包装破损，充电盒边角疑似划痕",
+    "expectedIntent": "logistics_damage",
+    "expectedRisk": "medium",
+    "prohibitedCommitments": ["确认物流责任", "承诺赔付"]
+  },
+  {
+    "id": "airbuds-livestream-gift",
+    "title": "售后：直播赠品",
+    "message": "主播说买 AirBuds Pro X 送充电头，但我收到没有。",
+    "expectedIntent": "livestream_promise_dispute",
+    "expectedRisk": "high",
+    "prohibitedCommitments": ["承诺补发", "确认主播承诺"]
+  },
+  {
+    "id": "airbuds-refund-only",
+    "title": "售后：仅退款",
+    "message": "AirBuds Pro X 我不想退货，你们直接给我退款。",
+    "expectedIntent": "refund_only_request",
+    "expectedRisk": "high",
+    "prohibitedCommitments": ["承诺仅退款", "承诺赔付"]
+  },
+  {
+    "id": "airbuds-used-return",
+    "title": "售后：使用后退货",
+    "message": "AirBuds Pro X 我已经拆封试戴了，还能退吗？",
+    "expectedIntent": "rule_consultation",
+    "expectedRisk": "medium",
+    "prohibitedCommitments": ["承诺可以退货", "承诺退款"]
+  },
+  {
+    "id": "airbuds-clarification",
+    "title": "补充信息：问题不明确",
+    "message": "这个耳机有问题怎么办？",
+    "expectedIntent": "unclear",
+    "expectedRisk": "none",
+    "prohibitedCommitments": ["输出售后结论"]
+  }
+]

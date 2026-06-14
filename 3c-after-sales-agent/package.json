@@ -1,0 +1,26 @@
+{
+  "name": "3c-after-sales-agent",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3000",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3000",
+    "lint": "next lint",
+    "smoke": "node scripts/smoke-test.mjs",
+    "build:index": "node scripts/build-knowledge-index.mjs",
+    "smoke:index": "node scripts/smoke-index.mjs",
+    "reranker:install": "python -m pip install -r requirements-reranker.txt",
+    "reranker:start": "python scripts/baai-reranker-server.py"
+  },
+  "dependencies": {
+    "@lancedb/lancedb": "^0.30.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest"
+  }
+}

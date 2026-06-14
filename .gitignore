@@ -30,3 +30,32 @@ build/
 
 .DS_Store
 Thumbs.db
+
+# Node / Next.js
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+**/out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment
+.env.local
+.env.*.local
+
+# Local runtime artifacts
+*.log
+3c-after-sales-agent/data/traces.json
+3c-after-sales-agent/data/memories.json
+3c-after-sales-agent/data/lancedb/
+
+# Temporary research / generated workspaces
+_tmp_*/
+
+# Local agent/BMAD tooling cache
+.agents/
+_bmad/

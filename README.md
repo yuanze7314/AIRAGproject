@@ -1,13 +1,51 @@
-# 智能客服回答：RAG 智能客服项目
+# AIRAGproject
 
-项目主体位于 [`rag-simple`](./rag-simple)。当前版本已包装为一个可本地演示的 RAG 智能客服项目，包含前端页面、mock 问答接口和可接入真实 RAG 的后端入口。
+本仓库包含两个智能客服 / RAG 相关项目：
 
-快速启动：
+- [`rag-simple`](./rag-simple)：原有 RAG 智能客服演示项目。
+- [`3c-after-sales-agent`](./3c-after-sales-agent)：3C 售后智能客服 Agent MVP，包含确定性 Agent Graph 编排、route-scoped RAG Service、本地 knowledge-index、Review/QA 安全闸门和本地 demo store。
+
+## 3C 售后 Agent 快速开始
 
 ```powershell
-cd E:\codex\AIRAGproject\rag-simple
-$env:PYTHONPATH="E:\codex\AIRAGproject\rag-simple\src"
+cd 3c-after-sales-agent
+npm install
+npm run build:index
+npm run build
+npm run dev
+```
+
+打开：
+
+```text
+http://127.0.0.1:3000
+```
+
+## 3C 售后 Agent 验证
+
+```powershell
+npm run smoke:index
+```
+
+端到端 smoke：
+
+```powershell
+npm run start -- --port 3001
+$env:SMOKE_BASE_URL="http://127.0.0.1:3001"
+npm run smoke
+```
+
+更多说明见 [`3c-after-sales-agent/README.md`](./3c-after-sales-agent/README.md)。
+
+## rag-simple 快速开始
+
+```powershell
+cd rag-simple
 python -m rag_simple.web_server
 ```
 
-打开 `http://127.0.0.1:8000/` 查看页面。
+打开：
+
+```text
+http://127.0.0.1:8000/
+```

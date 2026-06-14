@@ -49,9 +49,10 @@ pnpm-debug.log*
 
 # Local runtime artifacts
 *.log
-3c-after-sales-agent/data/traces.json
-3c-after-sales-agent/data/memories.json
-3c-after-sales-agent/data/lancedb/
+AI-Powered Customer Service/data/traces.json
+AI-Powered Customer Service/data/memories.json
+AI-Powered Customer Service/data/lancedb/
+3c-after-sales-agent/
 
 # Temporary research / generated workspaces
 _tmp_*/
@@ -59,3 +60,4 @@ _tmp_*/
 # Local agent/BMAD tooling cache
 .agents/
 _bmad/
+_bmad-output/

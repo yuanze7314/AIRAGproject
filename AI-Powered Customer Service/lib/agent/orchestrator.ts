@@ -266,11 +266,11 @@ function inferIntent(text: string) {
   if (/投诉|举报|不给我处理/.test(text)) return "complaint_escalation";
   if (/仅退款|直接退款|不想退货/.test(text)) return "refund_only_request";
   if (/主播|直播|承诺|赠品|送/.test(text)) return "livestream_promise_dispute";
-  if (/破|压坏|物流破损|包装|划痕/.test(text)) return "logistics_damage";
+  if (/破|压坏|物流破损|划痕/.test(text)) return "logistics_damage";
   if (/杂音|没声音|无声|单边|右耳|左耳|断连|坏|故障|质量|不能用/.test(text)) return "quality_issue";
-  if (/配件|充电头|数据线|少了|缺/.test(text)) return "accessory_missing";
+  if (/(少了|缺|没有|漏发|补发).*(配件|充电头|数据线|耳塞|包装清单)|(配件|充电头|数据线|耳塞).*(少了|缺|没有|漏发|补发)/.test(text)) return "accessory_missing";
   if (/激活|拆封|退/.test(text)) return "rule_consultation";
-  if (/规格|参数|蓝牙|续航|保修|降噪|主动降噪|支持|发货|送到|快递|单号|订单/.test(text)) return "general_question";
+  if (/规格|参数|蓝牙|续航|保修|降噪|主动降噪|支持|发货|送到|快递|单号|订单|包装|清单|配件/.test(text)) return "general_question";
   return "unclear";
 }
 
@@ -649,7 +649,7 @@ function categoryFromCase(structuredCase: StructuredCase): GeneralServiceResult[
   if (/快递|物流|单号|运单/.test(text)) return "logistics_info";
   if (/发货|送到|送达|到货|多久/.test(text)) return "delivery_time";
   if (/订单|付款|地址/.test(text)) return "order_info";
-  if (/规格|参数|蓝牙|续航|保修|降噪|内存|容量/.test(text)) return "product_specs";
+  if (/规格|参数|蓝牙|续航|保修|降噪|内存|容量|包装|清单|配件/.test(text)) return "product_specs";
   return "clarification";
 }
 

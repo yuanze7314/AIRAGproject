@@ -3,12 +3,12 @@
 本仓库包含两个智能客服 / RAG 相关项目：
 
 - [`rag-simple`](./rag-simple)：原有 RAG 智能客服演示项目。
-- [`3c-after-sales-agent`](./3c-after-sales-agent)：3C 售后智能客服 Agent MVP，包含确定性 Agent Graph 编排、route-scoped RAG Service、本地 knowledge-index、Review/QA 安全闸门和本地 demo store。
+- [`AI-Powered Customer Service`](./AI-Powered%20Customer%20Service)：AI-Powered Customer Service 项目，包含确定性 Agent Graph 编排、route-scoped RAG Service、本地 knowledge-index、Review/QA 安全闸门和本地 demo store。
 
-## 3C 售后 Agent 快速开始
+## AI-Powered Customer Service 快速开始
 
 ```powershell
-cd 3c-after-sales-agent
+cd "AI-Powered Customer Service"
 npm install
 npm run build:index
 npm run build
@@ -21,7 +21,7 @@ npm run dev
 http://127.0.0.1:3000
 ```
 
-## 3C 售后 Agent 验证
+## AI-Powered Customer Service 验证
 
 ```powershell
 npm run smoke:index
@@ -35,7 +35,7 @@ $env:SMOKE_BASE_URL="http://127.0.0.1:3001"
 npm run smoke
 ```
 
-更多说明见 [`3c-after-sales-agent/README.md`](./3c-after-sales-agent/README.md)。
+更多说明见 [`AI-Powered Customer Service/README.md`](./AI-Powered%20Customer%20Service/README.md)。
 
 ## rag-simple 快速开始
 

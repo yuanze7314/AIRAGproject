@@ -9,7 +9,7 @@
 
 决策：
 
-继续基于 `<项目根目录>\3c-after-sales-agent` 开发，不从零重建应用。
+继续基于 `<项目根目录>\AI-Powered Customer Service` 开发，不从零重建应用。
 
 理由：
 
@@ -163,3 +163,19 @@ PRD 明确要求第一版为本地模拟，避免真实用户数据和真实业�
 - `orchestrator` 依赖 `lib/rag/service.ts`，不直接依赖 `lib/rag/retrieval.ts` 的实现细节。
 - `RetrievalResult` 同时作为 trace 输出和业务命中的可复用中间产物。
 - 后续 RAG 契约测试应优先覆盖 service 门面，而不是直接耦合具体检索实现。
+
+## D-010：项目仓库与本地 skill 过程产物分离
+
+日期：2026-06-14
+状态：已接受
+
+决策：
+将项目目录重命名为 `AI-Powered Customer Service`，仓库中仅保留项目代码、项目 README、项目状态文档和任务/决策日志。本地 skill、BMAD 工具目录和 BMAD 过程产物不随项目仓库上传。
+
+理由：
+项目交付物应与本地 Agent/skill 工作区分离，避免把开发辅助工具、技能缓存或过程产物混入应用仓库。
+
+影响：
+- 应用目录为 `AI-Powered Customer Service`。
+- npm package 名称为合法包名 `ai-powered-customer-service`。
+- `.agents/`、`_bmad/`、`_bmad-output/`、旧本地缓存目录和运行产物均被 `.gitignore` 排除。

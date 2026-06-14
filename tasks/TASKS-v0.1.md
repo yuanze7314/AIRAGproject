@@ -14,7 +14,7 @@
 
 | ID | 状态 | 任务 | 来源 |
 | --- | --- | --- | --- |
-| T-001 | done | 保留现有 Next.js 项目 `3c-after-sales-agent`，不要从零重建。 | Story 1.1 |
+| T-001 | done | 保留现有 Next.js 项目 `AI-Powered Customer Service`，不要从零重建。 | Story 1.1 |
 | T-002 | done | 统一运行时类型：`StructuredCase`、`GuardrailResult`、`RouteDecision`、`RetrievalResult`、`ReviewResult`、`TemplateOutputResult`、`AgentGraphState`。 | Story 1.2 |
 | T-003 | done | 让 `/api/chat` 返回标准摘要：`conversationId`、`ticketId`、`visibleStatus`、`finalMessage`、`routeDecision`、`ticketStatus`、`traceId`。 | Story 1.2, 3.1 |
 | T-004 | done | 检查 demo 场景是否覆盖至少 8 个验收场景，并包含期望路由、风险信号和禁止承诺项。 | Story 1.3 |

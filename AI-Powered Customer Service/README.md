@@ -1,6 +1,6 @@
-# 3C After-Sales Agent
+# AI-Powered Customer Service
 
-3C 售后智能客服 Agent MVP。项目基于 Next.js，采用确定性 Agent Graph 编排、route-scoped RAG Service、本地 knowledge-index、Review/QA 安全闸门和本地 demo store。
+AI-Powered Customer Service MVP。项目基于 Next.js，采用确定性 Agent Graph 编排、route-scoped RAG Service、本地 knowledge-index、Review/QA 安全闸门和本地 demo store。
 
 ## 快速开始
 

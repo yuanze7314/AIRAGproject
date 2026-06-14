@@ -10,7 +10,7 @@ DeepSeek is called through its OpenAI-compatible Chat Completions API:
 
 ## Environment variables
 
-Create `3c-after-sales-agent/.env.local`:
+Create `AI-Powered Customer Service/.env.local`:
 
 ```env
 DEEPSEEK_API_KEY=your_api_key_here

@@ -1,18 +1,15 @@
+# Repository note: BMAD/skill 过程产物保留在本地工作区，不随项目仓库上传；仓库内以本文件、DECISION-LOG.md、	asks/TASKS-v0.1.md 和项目 docs/ 作为可提交的项目状态与设计说明。
+
 # 项目状态：3C 售后智能客服 Agent
 
 更新时间：2026-06-13
 项目根目录：用户指定的 E 盘项目根目录（`<项目根目录>`）
-代码目录：`<项目根目录>\3c-after-sales-agent`
+代码目录：`<项目根目录>\AI-Powered Customer Service`
 
 ## 当前实施依据
 
 后续实现以 2026-06-13 对齐后的规划文档为准：
 
-- `_bmad-output/planning-artifacts/prd-3c-after-sales-agent/prd.md`
-- `_bmad-output/planning-artifacts/architecture-3c-after-sales-agent/architecture.md`
-- `_bmad-output/planning-artifacts/epics-3c-after-sales-agent/epics-and-stories.md`
-- `_bmad-output/planning-artifacts/epics-3c-after-sales-agent/story-index.md`
-- `_bmad-output/planning-artifacts/sprint-change-proposal-20260613-agent-runtime-alignment.md`
 
 当前已批准的标准运行链路：
 
@@ -22,7 +19,7 @@
 
 这是一个已有项目，不是从零开始的新项目。
 
-已观察到 `3c-after-sales-agent` 中存在：
+已观察到 `AI-Powered Customer Service` 中存在：
 
 - Next.js 应用结构，包括 `app/`、`lib/`、`data/`、`knowledge/` 和 API route。
 - API route：`/api/chat`、`/api/scenarios`、`/api/badcases`、`/api/rules`。

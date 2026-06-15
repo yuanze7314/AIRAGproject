@@ -51,6 +51,7 @@ pnpm-debug.log*
 *.log
 AI-Powered Customer Service/data/traces.json
 AI-Powered Customer Service/data/memories.json
+AI-Powered Customer Service/data/badcases.local.json
 AI-Powered Customer Service/data/lancedb/
 3c-after-sales-agent/
 

@@ -31,19 +31,36 @@ const DEFAULT_MAX_TOKENS = 4_000;
 export type LlmSource = "deepseek" | "fallback";
 
 export function isLlmConfigured() {
-  return Boolean(apiKey()) && process.env.LLM_DISABLED !== "1" && process.env.DEEPSEEK_DISABLED !== "1";
+  return Boolean(apiKey()) && envValue("LLM_DISABLED") !== "1" && envValue("DEEPSEEK_DISABLED") !== "1";
 }
 
 export function activeModel() {
-  return process.env.LLM_MODEL ?? process.env.DEEPSEEK_MODEL ?? DEFAULT_MODEL;
+  return envValue("DEEPSEEK_MODEL") ?? envValue("LLM_MODEL") ?? DEFAULT_MODEL;
 }
 
 function apiKey() {
-  return process.env.DEEPSEEK_API_KEY ?? process.env.LLM_API_KEY;
+  return envValue("DEEPSEEK_API_KEY") ?? envValue("LLM_API_KEY");
 }
 
 function baseUrl() {
-  return process.env.LLM_API_BASE_URL ?? process.env.DEEPSEEK_API_BASE_URL ?? DEFAULT_BASE_URL;
+  return envValue("DEEPSEEK_API_BASE_URL") ?? envValue("LLM_API_BASE_URL") ?? DEFAULT_BASE_URL;
+}
+
+function envValue(name: string) {
+  const value = process.env[name]?.trim();
+  return value ? value : undefined;
+}
+
+function envNumber(names: readonly string[], fallback: number) {
+  for (const name of names) {
+    const value = envValue(name);
+    if (value === undefined) continue;
+
+    const parsed = Number(value);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+
+  return fallback;
 }
 
 function activeProvider(): Exclude<LlmSource, "fallback"> {
@@ -70,8 +87,8 @@ export async function generateStructuredOutput<T>(request: StructuredOutputReque
     return { value: request.fallback, source: "fallback", error: "DEEPSEEK_API_KEY or LLM_API_KEY is not configured" };
   }
 
-  const timeoutMs = Number(process.env.LLM_TIMEOUT_MS ?? process.env.DEEPSEEK_TIMEOUT_MS ?? DEFAULT_TIMEOUT_MS);
-  const maxTokens = Number(process.env.LLM_MAX_TOKENS ?? process.env.DEEPSEEK_MAX_TOKENS ?? DEFAULT_MAX_TOKENS);
+  const timeoutMs = envNumber(["DEEPSEEK_TIMEOUT_MS", "LLM_TIMEOUT_MS"], DEFAULT_TIMEOUT_MS);
+  const maxTokens = envNumber(["DEEPSEEK_MAX_TOKENS", "LLM_MAX_TOKENS"], DEFAULT_MAX_TOKENS);
   const body: Record<string, unknown> = {
     model: activeModel(),
     messages: [
@@ -90,12 +107,13 @@ export async function generateStructuredOutput<T>(request: StructuredOutputReque
     ],
     response_format: { type: "json_object" },
     stream: false,
-    temperature: Number(process.env.LLM_TEMPERATURE ?? process.env.DEEPSEEK_TEMPERATURE ?? 0.2),
+    temperature: envNumber(["DEEPSEEK_TEMPERATURE", "LLM_TEMPERATURE"], 0.2),
     max_tokens: maxTokens
   };
 
-  if (process.env.DEEPSEEK_THINKING === "1" || process.env.DEEPSEEK_THINKING === "0") {
-    body.thinking = { type: process.env.DEEPSEEK_THINKING === "1" ? "enabled" : "disabled" };
+  const thinking = envValue("DEEPSEEK_THINKING");
+  if (thinking === "1" || thinking === "0") {
+    body.thinking = { type: thinking === "1" ? "enabled" : "disabled" };
   }
 
   try {

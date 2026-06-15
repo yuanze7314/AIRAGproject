@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { traceSaveTool } from "../../../lib/agent/graph/tools";
 import { recordGraphBadcases, runAgentGraph } from "../../../lib/agent/orchestrator";
-import { saveTraceRun } from "../../../lib/store/trace";
 import type { ChatApiResponse, ConversationMessage } from "../../../lib/types";
 
 export async function POST(request: NextRequest) {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     images: body.images,
     history: body.history
   });
-  await saveTraceRun(result);
+  await traceSaveTool(result);
   await recordGraphBadcases(result);
 
   return NextResponse.json(result);

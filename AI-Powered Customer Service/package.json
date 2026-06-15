@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "build": "next build",
+    "test:graph": "node scripts/graph-state-test.mjs",
+    "test:ui": "node scripts/ui-shell-test.mjs",
     "start": "next start --hostname 127.0.0.1 --port 3000",
     "lint": "next lint",
     "smoke": "node scripts/smoke-test.mjs",
@@ -15,9 +17,13 @@
   },
   "dependencies": {
     "@lancedb/lancedb": "^0.30.0",
+    "@langchain/core": "^1.1.49",
+    "@langchain/langgraph": "^1.4.2",
+    "@phosphor-icons/react": "^2.1.10",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "framer-motion": "^12.40.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

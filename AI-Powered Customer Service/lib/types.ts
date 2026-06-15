@@ -129,6 +129,28 @@ export type GeneralServiceResult = {
   llmError?: string;
 };
 
+export type ExampleHit = {
+  id: string;
+  title: string;
+  routeType: RouteType;
+  purpose: "strategy" | "reply";
+  customerIntent?: string;
+  summary: string;
+  recommendedAction: string;
+  score: number;
+  source: "static" | "badcase";
+};
+
+export type ReplyTemplate = {
+  id: string;
+  name: string;
+  routeType: RouteType;
+  tone: "general" | "empathetic" | "handoff" | "clarification";
+  requiredSections: string[];
+  constraints: string[];
+  templateText: string;
+};
+
 export type RuleHit = {
   ruleId: string;
   title: string;
@@ -173,6 +195,15 @@ export type ReviewResult = {
   attempt: number;
 };
 
+export type LlmJudgeOutput = {
+  passed: boolean;
+  failureReasons: string[];
+  rewriteInstructions: string[];
+  finalAction: FinalAction | "rewrite";
+  judgeSource?: "rules" | "deepseek" | "fallback";
+  judgeError?: string;
+};
+
 export type ReviewLoopState = {
   target: "general_service_reply" | "after_sales_reply";
   maxAttempts: number;
@@ -197,6 +228,18 @@ export type ReviewLoopState = {
 export type QAResult = ReviewLoopState & {
   status: AgentStatus;
   badcaseRiskTags: string[];
+  llmJudge?: LlmJudgeOutput;
+  badcaseHits?: BadcaseHit[];
+};
+
+export type BadcaseHit = {
+  id: string;
+  badcaseType: string;
+  note: string;
+  routeType?: RouteType;
+  score: number;
+  source?: "manual" | "auto";
+  traceId?: string;
 };
 
 export type TemplateOutputResult = {
@@ -209,6 +252,35 @@ export type TemplateOutputResult = {
   safetyChecks: string[];
   finalAction: FinalAction;
   handoffReason?: string;
+};
+
+export type GraphRuntimeEvent = {
+  kind: "node_started" | "node_completed" | "update" | "checkpoint" | "error";
+  nodeName?: string;
+  checkpointId?: string;
+  step?: number;
+  next?: string[];
+  summary: string;
+  errorCategory?: GraphNodeFailurePolicy["category"];
+  fallbackAction?: GraphNodeFailurePolicy["fallbackAction"];
+  createdAt: string;
+};
+
+export type GraphRuntimeSummary = {
+  threadId: string;
+  checkpointer: "memory";
+  streamMode: Array<"updates" | "checkpoints">;
+  streamEvents: GraphRuntimeEvent[];
+  checkpoints: GraphRuntimeEvent[];
+};
+
+export type GraphNodeFailurePolicy = {
+  nodeName: string;
+  category: "memory" | "understanding" | "guardrail" | "routing" | "retrieval" | "reply_generation" | "qa" | "template" | "unknown";
+  severity: "recoverable" | "handoff";
+  fallbackAction: "safe_template" | "handoff";
+  customerSafe: boolean;
+  reason: string;
 };
 
 export type AgentNode<T> = {
@@ -233,7 +305,11 @@ export type TraceEvent = {
     | "template.validated"
     | "message.sent"
     | "handoff.started"
-    | "badcase.marked";
+    | "badcase.marked"
+    | "tool.called"
+    | "graph.node.started"
+    | "graph.node.completed"
+    | "graph.node.failed";
   status: AgentStatus;
   summary: string;
   payload?: unknown;
@@ -253,7 +329,12 @@ export type AgentGraphState = {
   generalService?: GeneralServiceResult;
   policyEvidence?: PolicyEvidenceResult;
   riskStrategy?: RiskStrategyResult;
+  similarExamples?: ExampleHit[];
+  selectedTemplate?: ReplyTemplate;
+  replyExamples?: ExampleHit[];
   replyDraft?: ReplyDraft;
+  badcaseHits?: BadcaseHit[];
+  llmJudge?: LlmJudgeOutput;
   reviewLoop?: ReviewLoopState;
   qaResult?: QAResult;
   templateOutput?: TemplateOutputResult;
@@ -263,6 +344,10 @@ export type AgentGraphState = {
   finalAction: FinalAction;
   ticketStatus: TicketStatus;
   handoffReason?: string;
+  failedNode?: string;
+  failurePolicy?: GraphNodeFailurePolicy;
+  graphExecutionHalted?: boolean;
+  graphRuntime?: GraphRuntimeSummary;
   traceEvents: TraceEvent[];
   agents: AgentNode<unknown>[];
 };

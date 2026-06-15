@@ -1,8 +1,8 @@
 import generalKb from "../../knowledge/general/general-service-kb.json";
+import { runCustomerServiceGraph } from "./graph/runner";
+import type { CustomerServiceLangGraphOptions } from "./graph/langgraph";
+import { llmJudgeTool } from "./graph/tools";
 import {
-  buildAfterSalesRetrievalResult,
-  buildGeneralRetrievalResult,
-  buildKnowledgeIndexRetrievalResult,
   generalKnowledgeHitsFromRetrievalResult,
   retrieveAfterSalesRulesFromIndex,
   retrieveGeneralKnowledgeFromIndex,
@@ -12,18 +12,19 @@ import { loadAfterSalesRules } from "../rag/rules";
 import { bm25Search } from "../rag/scoring";
 import { generateStructuredOutput } from "../llm/deepseek";
 import { saveAutoBadcase } from "../store/badcase";
-import { loadConversationMemory, saveConversationMemoryOutcome } from "../store/memory";
 import type {
   AgentGraphState,
-  AgentNode,
+  BadcaseHit,
   ConversationMemoryRecord,
   ConversationMessage,
+  ExampleHit,
   GeneralKnowledgeHit,
   GeneralServiceResult,
   GuardrailResult,
   PolicyEvidenceResult,
   QAResult,
   ReplyDraft,
+  ReplyTemplate,
   RetrievalResult,
   ReviewLoopState,
   RiskStrategyResult,
@@ -31,12 +32,9 @@ import type {
   RuleHit,
   StructuredCase,
   TemplateOutputResult,
-  TicketStatus,
-  TraceEvent,
   VisibleStatus
 } from "../types";
 
-const now = () => new Date().toISOString();
 const MAX_REVIEW_ATTEMPTS = 2;
 const FORBIDDEN_COMMITMENT_TERMS = [
   "一定可以退款",
@@ -821,27 +819,17 @@ async function llmQaJudge(input: {
   retrievalResult?: RetrievalResult;
 }): Promise<ReviewLoopState> {
   const fallback = reviewText(input.content, input.target, input.attempt);
-  const result = await generateStructuredOutput<Pick<ReviewLoopState, "passed" | "failureReasons" | "rewriteInstructions" | "finalAction">>({
-    name: input.target === "after_sales_reply" ? "after_sales_llm_qa_judge" : "general_llm_review_judge",
-    schema: qaJudgeSchema,
+  const judge = await llmJudgeTool({
+    content: input.content,
+    target: input.target,
+    attempt: input.attempt,
     fallback: {
       passed: fallback.passed,
       failureReasons: fallback.failureReasons,
       rewriteInstructions: fallback.rewriteInstructions,
       finalAction: fallback.finalAction
     },
-    validate: isQaJudgeResult,
-    system: [
-      "You are an independent QA judge for a Chinese e-commerce customer service Agent.",
-      "The only product in scope is AirBuds Pro X wireless earbuds.",
-      "Review the customer-visible reply independently from the drafting agent.",
-      "Fail the reply if it promises refund, compensation, reshipment, replacement, final liability, or guaranteed approval.",
-      "Fail the reply if it asks users for photos, screenshots, image uploads, product pictures, or visual proof.",
-      "Fail after-sales replies that do not mention verification, evidence, platform review, or human handoff when information is insufficient.",
-      "Fail general-service replies that answer refund, return, compensation, replacement, or liability as ordinary service.",
-      "Return JSON only."
-    ].join("\n"),
-    user: {
+    context: {
       target: input.target,
       attempt: input.attempt,
       reply: input.content,
@@ -856,12 +844,12 @@ async function llmQaJudge(input: {
     target: input.target,
     maxAttempts: MAX_REVIEW_ATTEMPTS,
     currentAttempt: input.attempt,
-    passed: result.value.passed,
-    failureReasons: result.value.failureReasons,
-    rewriteInstructions: result.value.rewriteInstructions,
-    finalAction: result.value.passed ? "send" : input.attempt >= MAX_REVIEW_ATTEMPTS ? "handoff" : result.value.finalAction,
-    judgeSource: result.source,
-    judgeError: result.error
+    passed: judge.output.passed,
+    failureReasons: judge.output.failureReasons,
+    rewriteInstructions: judge.output.rewriteInstructions,
+    finalAction: judge.output.passed ? "send" : input.attempt >= MAX_REVIEW_ATTEMPTS ? "handoff" : judge.output.finalAction,
+    judgeSource: judge.output.judgeSource,
+    judgeError: judge.output.judgeError
   };
 }
 
@@ -950,21 +938,37 @@ export async function riskStrategyAgent(structuredCase: StructuredCase, guardrai
   };
 }
 
-async function fallbackReplyAgent(structuredCase: StructuredCase, policy: PolicyEvidenceResult, risk: RiskStrategyResult, rewriteInstructions: string[] = []): Promise<ReplyDraft> {
+async function fallbackReplyAgent(
+  structuredCase: StructuredCase,
+  policy: PolicyEvidenceResult,
+  risk: RiskStrategyResult,
+  rewriteInstructions: string[] = [],
+  context?: { selectedTemplate?: ReplyTemplate; replyExamples?: ExampleHit[] }
+): Promise<ReplyDraft> {
   const prefix = rewriteInstructions.length ? "您好，为避免误解，我重新说明一下。" : "您好，理解您的诉求。";
   const ruleTitle = policy.ruleHits[0]?.title ?? "平台售后规则";
   const basisText = policy.uncertainty.length ? "当前售后处理原则和您提供的信息" : `${ruleTitle}以及您提供的凭证`;
   const evidenceText = policy.requiredAdditionalEvidence.length ? `建议您补充${policy.requiredAdditionalEvidence.slice(0, 3).join("、")}，方便进一步核实。` : "我们会结合您提供的信息继续核实。";
   return {
     content: `${prefix}关于您反馈的“${structuredCase.originalMessage}”，当前需要结合${basisText}进一步判断。${policy.uncertainty.length ? "当前规则依据还不充分，不能直接引用具体规则结论。" : ""}${evidenceText}目前无法直接承诺退款、赔付、补发或最终责任，最终处理需以平台审核结果为准。`,
-    basisSummary: policy.uncertainty.length ? ["规则依据不足，采用保守核实口径"] : policy.ruleHits.map((rule) => rule.title),
+    basisSummary: [
+      ...(policy.uncertainty.length ? ["规则依据不足，采用保守核实口径"] : policy.ruleHits.map((rule) => rule.title)),
+      ...(context?.selectedTemplate ? [`template:${context.selectedTemplate.id}`] : []),
+      ...(context?.replyExamples?.length ? context.replyExamples.map((example) => `example:${example.id}`) : [])
+    ],
     respectedConstraints: risk.prohibitedCommitments,
     qaChecklist: ["未承诺退款", "未承诺赔付", "未最终判责", "包含核实或补证说明"]
   };
 }
 
-export async function replyAgent(structuredCase: StructuredCase, policy: PolicyEvidenceResult, risk: RiskStrategyResult, rewriteInstructions: string[] = []): Promise<ReplyDraft> {
-  const fallback = await fallbackReplyAgent(structuredCase, policy, risk, rewriteInstructions);
+export async function replyAgent(
+  structuredCase: StructuredCase,
+  policy: PolicyEvidenceResult,
+  risk: RiskStrategyResult,
+  rewriteInstructions: string[] = [],
+  context?: { selectedTemplate?: ReplyTemplate; replyExamples?: ExampleHit[] }
+): Promise<ReplyDraft> {
+  const fallback = await fallbackReplyAgent(structuredCase, policy, risk, rewriteInstructions, context);
   const result = await generateStructuredOutput<ReplyDraft>({
     name: "after_sales_reply_draft",
     schema: replyDraftSchema,
@@ -978,7 +982,15 @@ export async function replyAgent(structuredCase: StructuredCase, policy: PolicyE
       "If evidence or rules are insufficient, use conservative verification wording and do not cite a specific rule conclusion.",
       "The image evidence-chain feature is paused. Do not ask users for photos, screenshots, image uploads, product pictures, or visual proof."
     ].join("\n"),
-    user: { structuredCase, policy, risk, rewriteInstructions, fallback }
+    user: {
+      structuredCase,
+      policy,
+      risk,
+      rewriteInstructions,
+      selectedTemplate: context?.selectedTemplate,
+      replyExamples: context?.replyExamples,
+      fallback
+    }
   });
 
   return {
@@ -992,6 +1004,7 @@ export async function qaAgent(reply: ReplyDraft, risk: RiskStrategyResult, attem
   structuredCase?: StructuredCase;
   policyEvidence?: PolicyEvidenceResult;
   retrievalResult?: RetrievalResult;
+  badcaseHits?: BadcaseHit[];
 }): Promise<QAResult> {
   const review = combineReviewResults(
     reviewText(reply.content, "after_sales_reply", attempt),
@@ -1014,7 +1027,16 @@ export async function qaAgent(reply: ReplyDraft, risk: RiskStrategyResult, attem
   return {
     ...review,
     status: review.passed ? "completed" : review.finalAction === "handoff" ? "handoff_required" : "needs_rewrite",
-    badcaseRiskTags: evaluateReplySafety(reply.content, "after_sales_reply").riskFlags
+    badcaseRiskTags: evaluateReplySafety(reply.content, "after_sales_reply").riskFlags,
+    llmJudge: {
+      passed: review.passed,
+      failureReasons: review.failureReasons,
+      rewriteInstructions: review.rewriteInstructions,
+      finalAction: review.finalAction,
+      judgeSource: review.judgeSource,
+      judgeError: review.judgeError
+    },
+    badcaseHits: context?.badcaseHits
   };
 }
 
@@ -1023,15 +1045,24 @@ async function runAfterSalesQaLoop(input: {
   policyEvidence: PolicyEvidenceResult;
   riskStrategy: RiskStrategyResult;
   retrievalResult?: RetrievalResult;
+  selectedTemplate?: ReplyTemplate;
+  replyExamples?: ExampleHit[];
+  badcaseHits?: BadcaseHit[];
 }) {
   let rewriteInstructions: string[] = [];
-  let replyDraft = await replyAgent(input.structuredCase, input.policyEvidence, input.riskStrategy, rewriteInstructions);
+  let replyDraft = await replyAgent(input.structuredCase, input.policyEvidence, input.riskStrategy, rewriteInstructions, {
+    selectedTemplate: input.selectedTemplate,
+    replyExamples: input.replyExamples
+  });
   let qaResult = await qaAgent(replyDraft, input.riskStrategy, 1, input);
   const attempts: NonNullable<QAResult["attempts"]> = [reviewAttempt(replyDraft.content, qaResult)];
 
   while (!qaResult.passed && qaResult.finalAction === "rewrite" && qaResult.currentAttempt < MAX_REVIEW_ATTEMPTS) {
     rewriteInstructions = qaResult.rewriteInstructions;
-    replyDraft = await replyAgent(input.structuredCase, input.policyEvidence, input.riskStrategy, rewriteInstructions);
+    replyDraft = await replyAgent(input.structuredCase, input.policyEvidence, input.riskStrategy, rewriteInstructions, {
+      selectedTemplate: input.selectedTemplate,
+      replyExamples: input.replyExamples
+    });
     qaResult = await qaAgent(replyDraft, input.riskStrategy, qaResult.currentAttempt + 1, input);
     attempts.push(reviewAttempt(replyDraft.content, qaResult));
   }
@@ -1063,264 +1094,22 @@ export function templateOutputAgent(input: { routeType: RouteDecision["routeType
   };
 }
 
-function node<T>(name: string, status: AgentNode<T>["status"], summary: string, output?: T): AgentNode<T> {
-  return { name, status, summary, output };
-}
-
-function traceEvent(traceId: string, type: TraceEvent["type"], status: TraceEvent["status"], summary: string, payload?: unknown): TraceEvent {
-  return { id: crypto.randomUUID(), traceId, type, status, summary, payload, createdAt: now() };
-}
-
-function ticketStatusFrom(routeType: RouteDecision["routeType"] | undefined, finalAction: TemplateOutputResult["finalAction"]): TicketStatus {
-  if (finalAction === "handoff") return "handoff";
-  if (routeType === "needs_clarification") return "needs_clarification";
-  return "completed";
-}
-
-async function persistMemoryForOutput(input: {
-  memory: ConversationMemoryRecord;
-  messages: ConversationMessage[];
-  templateOutput: TemplateOutputResult;
-  routeType?: RouteDecision["routeType"];
-  handoffReason?: string;
-  missingFields?: string[];
-}) {
-  return saveConversationMemoryOutcome({
-    memory: input.memory,
-    messages: input.messages,
-    finalMessage: input.templateOutput.finalMessage,
-    finalAction: input.templateOutput.finalAction,
-    routeType: input.routeType,
-    handoffReason: input.handoffReason ?? input.templateOutput.handoffReason,
-    missingFields: input.missingFields
-  });
-}
-
-export async function runAgentGraph(input: { conversationId?: string; content: string; images?: string[]; history?: ConversationMessage[] }): Promise<AgentGraphState> {
-  const traceId = `trace_${crypto.randomUUID()}`;
-  const conversationId = input.conversationId ?? crypto.randomUUID();
-  const ticketId = `T-${conversationId.slice(0, 8)}`;
-  const userMessage: ConversationMessage = {
-    id: crypto.randomUUID(),
-    role: "user",
-    content: input.content,
-    images: input.images ?? [],
-    createdAt: now()
-  };
-  const messages = [...(input.history ?? []), userMessage];
-  const memory = await loadConversationMemory({ conversationId, ticketId, messages, history: input.history ?? [] });
-  const structuredCase = await caseUnderstandingAgent(messages, memory);
-  const guardrail = await ruleGuardrailAgent(structuredCase);
-  const routeDecision = await queryRouterAgent(structuredCase, guardrail);
-  const agents: AgentNode<unknown>[] = [
-    node("Memory Agent", "completed", "已通过外挂 Memory Adapter 注入会话记忆与已采取措施", memory),
-    node("Case Understanding Agent", "completed", structuredCase.issueSummary, structuredCase),
-    node("Rule Guardrail Agent", guardrail.requiredHumanHandoff ? "handoff_required" : "completed", guardrail.guardrailReason, guardrail),
-    node("Query Router Agent", "completed", `${routeDecision.routeType}：${routeDecision.rationale}`, routeDecision)
-  ];
-  const traceEvents: TraceEvent[] = [
-    traceEvent(traceId, "memory.loaded", "completed", "已通过外挂 Memory Adapter 读取并注入会话记忆", memory),
-    traceEvent(traceId, "case.structured", "completed", structuredCase.issueSummary, structuredCase),
-    traceEvent(traceId, "guardrail.checked", guardrail.requiredHumanHandoff ? "handoff_required" : "completed", guardrail.guardrailReason, guardrail),
-    traceEvent(traceId, "router.decided", "completed", `${routeDecision.routeType}：${routeDecision.rationale}`, routeDecision)
-  ];
-  const clarificationLoopExceeded = (structuredCase.clarificationRound ?? 0) >= 1 && structuredCase.missingFields.length > 0;
-
-  if (routeDecision.routeType === "handoff_required") {
-    const templateOutput = templateOutputAgent({ routeType: routeDecision.routeType, handoffReason: guardrail.guardrailReason });
-    const updatedMemory = await persistMemoryForOutput({ memory, messages, templateOutput, routeType: routeDecision.routeType, handoffReason: guardrail.guardrailReason });
-    agents.push(node("Human Handoff Agent", "handoff_required", guardrail.guardrailReason, templateOutput));
-    agents.push(node("Template Output Agent", "completed", "已输出转人工模板", templateOutput));
-    traceEvents.push(traceEvent(traceId, "handoff.started", "handoff_required", guardrail.guardrailReason, templateOutput));
-    traceEvents.push(traceEvent(traceId, "template.validated", "completed", "已输出转人工模板", templateOutput));
-    const graph: AgentGraphState = {
-      traceId,
-      conversationId,
-      ticketId,
-      messages,
-      memory: updatedMemory,
-      structuredCase,
-      guardrail,
-      routeDecision,
-      templateOutput,
-      visibleStatus: templateOutput.visibleStatus,
-      finalMessage: templateOutput.finalMessage,
-      finalReply: templateOutput.renderedText,
-      finalAction: "handoff",
-      ticketStatus: ticketStatusFrom(routeDecision.routeType, templateOutput.finalAction),
-      handoffReason: guardrail.guardrailReason,
-      traceEvents,
-      agents
-    };
-    if (clarificationLoopExceeded) {
-      await recordAutoBadcase({ graph, type: "clarification_loop_exceeded", note: "Clarification loop exceeded and router sent the case to handoff." });
-    }
-    return graph;
-  }
-
-  if (routeDecision.routeType === "needs_clarification") {
-    if (clarificationLoopExceeded) {
-      const handoffReason = "连续两轮信息仍不足，转人工避免重复追问";
-      const templateOutput = templateOutputAgent({ routeType: "handoff_required", handoffReason });
-      const updatedMemory = await persistMemoryForOutput({ memory, messages, templateOutput, routeType: routeDecision.routeType, handoffReason, missingFields: structuredCase.missingFields });
-      agents.push(node("Clarification Agent", "handoff_required", handoffReason, { requiredInfo: routeDecision.requiredInfo, missingFields: structuredCase.missingFields, previousMissingFields: structuredCase.previousMissingFields, resolvedMissingFields: structuredCase.resolvedMissingFields, newMissingFields: structuredCase.newMissingFields, clarificationRound: structuredCase.clarificationRound }));
-      agents.push(node("Template Output Agent", "completed", "连续澄清超限，输出转人工模板", templateOutput));
-      traceEvents.push(traceEvent(traceId, "branch.generated", "handoff_required", handoffReason, { requiredInfo: routeDecision.requiredInfo, missingFields: structuredCase.missingFields, previousMissingFields: structuredCase.previousMissingFields, resolvedMissingFields: structuredCase.resolvedMissingFields, newMissingFields: structuredCase.newMissingFields, clarificationRound: structuredCase.clarificationRound }));
-      traceEvents.push(traceEvent(traceId, "handoff.started", "handoff_required", handoffReason, templateOutput));
-      const graph: AgentGraphState = {
-        traceId,
-        conversationId,
-        ticketId,
-        messages,
-        memory: updatedMemory,
-        structuredCase,
-        guardrail,
-        routeDecision,
-        templateOutput,
-        visibleStatus: templateOutput.visibleStatus,
-        finalMessage: templateOutput.finalMessage,
-        finalReply: templateOutput.renderedText,
-        finalAction: "handoff",
-        ticketStatus: "handoff",
-        handoffReason,
-        traceEvents,
-        agents
-      };
-      await recordAutoBadcase({ graph, type: "clarification_loop_exceeded", note: handoffReason });
-      return graph;
-    }
-    const remainingFields = routeDecision.requiredInfo.length ? routeDecision.requiredInfo : structuredCase.missingFields;
-    const resolvedText = structuredCase.resolvedMissingFields?.length ? `已收到您补充的${structuredCase.resolvedMissingFields.join("、")}。` : "";
-    const content = `您好，${resolvedText}为了准确处理您的问题，请补充：${remainingFields.length ? remainingFields.join("、") : "具体问题"}。`;
-    const templateOutput = templateOutputAgent({ routeType: routeDecision.routeType, content });
-    const updatedMemory = await persistMemoryForOutput({ memory, messages, templateOutput, routeType: routeDecision.routeType, missingFields: routeDecision.requiredInfo });
-    agents.push(node("Clarification Agent", "completed", "已生成补充信息回复", { content, requiredInfo: remainingFields, previousMissingFields: structuredCase.previousMissingFields, resolvedMissingFields: structuredCase.resolvedMissingFields, newMissingFields: structuredCase.newMissingFields, clarificationRound: structuredCase.clarificationRound }));
-    agents.push(node("Template Output Agent", "completed", "补充信息模板校验通过", templateOutput));
-    traceEvents.push(traceEvent(traceId, "branch.generated", "completed", "已生成补充信息回复", { content, requiredInfo: remainingFields, previousMissingFields: structuredCase.previousMissingFields, resolvedMissingFields: structuredCase.resolvedMissingFields, newMissingFields: structuredCase.newMissingFields, clarificationRound: structuredCase.clarificationRound }));
-    traceEvents.push(traceEvent(traceId, "template.validated", "completed", "补充信息模板校验通过", templateOutput));
-    traceEvents.push(traceEvent(traceId, templateOutput.finalAction === "handoff" ? "handoff.started" : "message.sent", templateOutput.finalAction === "handoff" ? "handoff_required" : "completed", templateOutput.finalMessage, templateOutput));
-    return {
-      traceId,
-      conversationId,
-      ticketId,
-      messages,
-      memory: updatedMemory,
-      structuredCase,
-      guardrail,
-      routeDecision,
-      templateOutput,
-      visibleStatus: templateOutput.visibleStatus,
-      finalMessage: templateOutput.finalMessage,
-      finalReply: templateOutput.renderedText,
-      finalAction: templateOutput.finalAction,
-      ticketStatus: ticketStatusFrom(routeDecision.routeType, templateOutput.finalAction),
-      traceEvents,
-      agents
-    };
-  }
-
-  if (routeDecision.routeType === "general_service") {
-    const generalCategory = categoryFromCase(structuredCase);
-    const initialRetrievalResult = await buildKnowledgeIndexRetrievalResult({
-      structuredCase,
-      knowledgeBase: "general",
-      fallbackCategory: generalCategory
-    });
-    let generalService = await generalServiceAgent(structuredCase, initialRetrievalResult);
-    const retrievalResult = await buildGeneralRetrievalResult(structuredCase, generalService, initialRetrievalResult);
-    let reviewLoop = reviewText(generalService.answer, "general_service_reply", 1);
-    if (!reviewLoop.passed && reviewLoop.finalAction === "rewrite") {
-      generalService.answer = `${generalService.answer} 如仍无法确认，我会为您转人工继续核实。`;
-      reviewLoop = reviewText(generalService.answer, "general_service_reply", 2);
-    }
-    const reviewedGeneral = await runGeneralReviewLoop({ structuredCase, retrievalResult, initialService: generalService });
-    generalService = reviewedGeneral.generalService;
-    reviewLoop = reviewedGeneral.reviewLoop;
-    const templateOutput = templateOutputAgent({ routeType: reviewLoop.finalAction === "handoff" ? "handoff_required" : routeDecision.routeType, content: generalService.answer });
-    const handoffReason = templateOutput.finalAction === "handoff" ? "普通客服审核或模板校验未通过" : undefined;
-    const updatedMemory = await persistMemoryForOutput({ memory, messages, templateOutput, routeType: routeDecision.routeType, handoffReason });
-    agents.push(node("General Service Agent", "completed", `命中 ${generalService.retrievedKnowledge.length} 条普通客服知识`, generalService));
-    agents.push(node("General Review Agent", reviewLoop.passed ? "completed" : "handoff_required", reviewLoop.passed ? "普通回复审核通过" : "普通回复审核超限，转人工", reviewLoop));
-    agents.push(node("Template Output Agent", templateOutput.validationPassed ? "completed" : "handoff_required", "已完成普通客服模板校验", templateOutput));
-    traceEvents.push(traceEvent(traceId, "rag.retrieved", retrievalResult.insufficientGrounding ? "needs_rewrite" : "completed", `命中 ${retrievalResult.rerankedTopK.length} 条普通客服知识，grounding=${retrievalResult.groundingConfidence.toFixed(2)}`, retrievalResult));
-    traceEvents.push(traceEvent(traceId, "branch.generated", "completed", "已生成普通客服候选回复", generalService));
-    traceEvents.push(traceEvent(traceId, "review.completed", reviewLoop.passed ? "completed" : "handoff_required", reviewLoop.passed ? "普通回复审核通过" : "普通回复审核超限，转人工", reviewLoop));
-    traceEvents.push(traceEvent(traceId, "template.validated", templateOutput.validationPassed ? "completed" : "handoff_required", "已完成普通客服模板校验", templateOutput));
-    traceEvents.push(traceEvent(traceId, templateOutput.finalAction === "handoff" ? "handoff.started" : "message.sent", templateOutput.finalAction === "handoff" ? "handoff_required" : "completed", templateOutput.finalMessage, templateOutput));
-    return {
-      traceId,
-      conversationId,
-      ticketId,
-      messages,
-      memory: updatedMemory,
-      structuredCase,
-      guardrail,
-      routeDecision,
-      retrievalResult,
-      generalService,
-      reviewLoop,
-      templateOutput,
-      visibleStatus: templateOutput.visibleStatus,
-      finalMessage: templateOutput.finalMessage,
-      finalReply: templateOutput.renderedText,
-      finalAction: templateOutput.finalAction,
-      ticketStatus: ticketStatusFrom(routeDecision.routeType, templateOutput.finalAction),
-      handoffReason,
-      traceEvents,
-      agents
-    };
-  }
-
-  const initialRetrievalResult = await buildKnowledgeIndexRetrievalResult({
-    structuredCase,
-    knowledgeBase: "after_sales"
-  });
-  const [policyEvidence, riskStrategy] = await Promise.all([
-    policyEvidenceAgent(structuredCase, initialRetrievalResult),
-    riskStrategyAgent(structuredCase, guardrail)
-  ]);
-  const retrievalResult = await buildAfterSalesRetrievalResult(structuredCase, policyEvidence, initialRetrievalResult);
-  if (retrievalResult.insufficientGrounding) {
-    policyEvidence.uncertainty.push("RAG grounding 不足，回复不得引用具体规则结论");
-  }
-  const { replyDraft, qaResult } = await runAfterSalesQaLoop({ structuredCase, policyEvidence, riskStrategy, retrievalResult });
-  const finalRoute = riskStrategy.handoffRequired || qaResult.finalAction === "handoff" ? "handoff_required" : routeDecision.routeType;
-  const templateOutput = templateOutputAgent({ routeType: finalRoute, content: replyDraft.content, handoffReason: riskStrategy.handoffReason });
-  const handoffReason = templateOutput.finalAction === "handoff" ? riskStrategy.handoffReason ?? "审核循环超限或模板校验未通过" : undefined;
-  const updatedMemory = await persistMemoryForOutput({ memory, messages, templateOutput, routeType: routeDecision.routeType, handoffReason });
-  agents.push(node("Policy & Evidence Agent", "completed", `命中 ${policyEvidence.ruleHits.length} 条规则，证据充分度：${policyEvidence.evidenceSufficiency}`, policyEvidence));
-  agents.push(node("Risk & Strategy Agent", riskStrategy.handoffRequired ? "handoff_required" : "completed", `${riskStrategy.riskLevel} 风险：${riskStrategy.rationale}`, riskStrategy));
-  agents.push(node("Reply Agent", "completed", "已生成售后候选回复", replyDraft));
-  agents.push(node("QA Agent", qaResult.status, qaResult.passed ? "售后质检通过" : "售后质检未通过或转人工", qaResult));
-  agents.push(node("Template Output Agent", templateOutput.validationPassed ? "completed" : "handoff_required", "已完成售后模板校验", templateOutput));
-  traceEvents.push(traceEvent(traceId, "rag.retrieved", retrievalResult.insufficientGrounding ? "needs_rewrite" : "completed", `命中 ${retrievalResult.rerankedTopK.length} 条售后规则，grounding=${retrievalResult.groundingConfidence.toFixed(2)}`, retrievalResult));
-  traceEvents.push(traceEvent(traceId, "branch.generated", "completed", "已生成售后候选回复", { policyEvidence, riskStrategy, replyDraft }));
-  traceEvents.push(traceEvent(traceId, "qa.completed", qaResult.status, qaResult.passed ? "售后质检通过" : "售后质检未通过或转人工", qaResult));
-  traceEvents.push(traceEvent(traceId, "template.validated", templateOutput.validationPassed ? "completed" : "handoff_required", "已完成售后模板校验", templateOutput));
-  traceEvents.push(traceEvent(traceId, templateOutput.finalAction === "handoff" ? "handoff.started" : "message.sent", templateOutput.finalAction === "handoff" ? "handoff_required" : "completed", templateOutput.finalMessage, templateOutput));
-
-  return {
-    traceId,
-    conversationId,
-    ticketId,
-    messages,
-    memory: updatedMemory,
-    structuredCase,
-    guardrail,
-    routeDecision,
-    retrievalResult,
-    policyEvidence,
-    riskStrategy,
-    replyDraft,
-    qaResult,
-    templateOutput,
-    visibleStatus: templateOutput.visibleStatus,
-    finalMessage: templateOutput.finalMessage,
-    finalReply: templateOutput.renderedText,
-    finalAction: templateOutput.finalAction,
-    ticketStatus: ticketStatusFrom(routeDecision.routeType, templateOutput.finalAction),
-    handoffReason,
-    traceEvents,
-    agents
-  };
+export async function runAgentGraph(
+  input: { conversationId?: string; content: string; images?: string[]; history?: ConversationMessage[] },
+  options?: CustomerServiceLangGraphOptions
+): Promise<AgentGraphState> {
+  return runCustomerServiceGraph(input, {
+    caseUnderstandingAgent,
+    ruleGuardrailAgent,
+    queryRouterAgent,
+    categoryFromCase,
+    generalServiceAgent,
+    reviewText,
+    runGeneralReviewLoop,
+    policyEvidenceAgent,
+    riskStrategyAgent,
+    replyAgent,
+    qaAgent,
+    templateOutputAgent
+  }, options);
 }

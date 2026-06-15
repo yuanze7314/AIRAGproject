@@ -20,7 +20,9 @@ Out of scope for now:
 
 ## Runtime Entry
 
-`POST /api/chat` calls `runAgentGraph` in `lib/agent/orchestrator.ts`.
+`POST /api/chat` calls `runAgentGraph` in `lib/agent/orchestrator.ts`. `POST /api/chat/stream` uses the same graph and returns SSE runtime events plus the final graph result.
+
+The runtime is a real `@langchain/langgraph` `StateGraph`, not a hand-written sequence runner. The compiled graph uses `MemorySaver` checkpoints and executes through LangGraph stream mode with `updates` and `checkpoints`; the collected runtime summary is returned as `graphRuntime`. The browser can also receive runtime progress through `POST /api/chat/stream`.
 
 Input:
 
@@ -35,6 +37,9 @@ Output:
 - Route decision.
 - Agent node outputs.
 - Trace events.
+- Graph node started/completed/failed events.
+- LangGraph stream/checkpoint summary in `graphRuntime`.
+- Node failure classification in `failurePolicy`, with either safe-template fallback or handoff.
 - Retrieval and QA details when applicable.
 
 Trace records are stored in `data/traces.json`.

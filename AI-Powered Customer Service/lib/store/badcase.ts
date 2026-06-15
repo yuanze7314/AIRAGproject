@@ -2,7 +2,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import type { AgentGraphState, BadcaseRecord, RouteType } from "../types";
 
-const filePath = path.join(process.cwd(), "data", "badcases.json");
+const fixturePath = path.join(process.cwd(), "data", "badcases.json");
+const runtimePath = path.join(process.cwd(), "data", "badcases.local.json");
 
 type SaveBadcaseInput = {
   userMessage: string;
@@ -18,14 +19,25 @@ function parseStore(content: string): BadcaseRecord[] {
   return JSON.parse(content.replace(/^\uFEFF/, "")) as BadcaseRecord[];
 }
 
-export async function listBadcases(filters?: { type?: string; source?: string; traceId?: string; routeType?: string }) {
-  let current: BadcaseRecord[];
+async function readStore(filePath: string): Promise<BadcaseRecord[]> {
   try {
-    current = parseStore(await fs.readFile(filePath, "utf8"));
+    return parseStore(await fs.readFile(filePath, "utf8"));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw error;
   }
+}
+
+async function writeRuntimeStore(records: BadcaseRecord[]) {
+  await fs.mkdir(path.dirname(runtimePath), { recursive: true });
+  await fs.writeFile(runtimePath, JSON.stringify(records, null, 2), "utf8");
+}
+
+export async function listBadcases(filters?: { type?: string; source?: string; traceId?: string; routeType?: string }) {
+  const current = [
+    ...await readStore(runtimePath),
+    ...await readStore(fixturePath)
+  ];
 
   return current.filter((record) => {
     if (filters?.type && record.badcaseType !== filters.type) return false;
@@ -37,7 +49,7 @@ export async function listBadcases(filters?: { type?: string; source?: string; t
 }
 
 export async function saveBadcase(input: SaveBadcaseInput) {
-  const current = await listBadcases();
+  const current = await readStore(runtimePath);
   const record: BadcaseRecord = {
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
@@ -47,7 +59,7 @@ export async function saveBadcase(input: SaveBadcaseInput) {
     ...input
   };
   current.unshift(record);
-  await fs.writeFile(filePath, JSON.stringify(current, null, 2), "utf8");
+  await writeRuntimeStore(current);
   return record;
 }
 

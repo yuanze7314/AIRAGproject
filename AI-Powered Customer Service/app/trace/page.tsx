@@ -12,6 +12,8 @@ function routeLabel(route?: string) {
 }
 
 function statusLabel(status?: string) {
+  if (status === "running") return "执行中";
+  if (status === "failed") return "失败";
   if (status === "sent") return "已回复";
   if (status === "needs_clarification") return "待补充";
   if (status === "handoff") return "已转人工";
@@ -34,7 +36,11 @@ function eventLabel(type: TraceEvent["type"]) {
     "template.validated": "模板校验",
     "message.sent": "客户回复",
     "handoff.started": "转人工",
-    "badcase.marked": "Badcase"
+    "badcase.marked": "Badcase",
+    "tool.called": "Tool call",
+    "graph.node.started": "Graph 节点开始",
+    "graph.node.completed": "Graph 节点完成",
+    "graph.node.failed": "Graph 节点失败"
   };
   return labels[type];
 }
@@ -51,12 +57,11 @@ function short(value?: string, fallback = "-") {
 function reviewAttempt(value: ChatApiResponse["qaResult"] | ChatApiResponse["reviewLoop"] | undefined): number | string {
   if (!value) return "-";
   if (value.attempts?.length) return value.attempts.length;
-  return "attempt" in value && typeof value.attempt === "number" ? value.attempt : value.currentAttempt;
+  return value.currentAttempt;
 }
 
 function reviewFailures(value: ChatApiResponse["qaResult"] | ChatApiResponse["reviewLoop"] | undefined): string[] | undefined {
-  if (!value) return undefined;
-  return "reasons" in value && Array.isArray(value.reasons) ? value.reasons : value.failureReasons;
+  return value?.failureReasons;
 }
 
 export default function TracePage() {
@@ -136,6 +141,14 @@ export default function TracePage() {
 
             <section className="insight-grid" aria-label="复盘摘要">
               <article className="insight-block">
+                <span>Graph runtime</span>
+                <p><strong>Stream：</strong>{graph.graphRuntime ? graph.graphRuntime.streamMode.join(" + ") : "-"}</p>
+                <p><strong>Events：</strong>{graph.graphRuntime?.streamEvents.length ?? "-"}</p>
+                <p><strong>Checkpoints：</strong>{graph.graphRuntime?.checkpoints.length ?? "-"}</p>
+                <p><strong>Failed node：</strong>{graph.failedNode ?? "-"}</p>
+                <p><strong>Fallback：</strong>{graph.failurePolicy?.fallbackAction ?? "-"}</p>
+              </article>
+              <article className="insight-block">
                 <span>缺失字段变化</span>
                 <p><strong>上一轮：</strong>{joinList(structuredCase?.previousMissingFields)}</p>
                 <p><strong>已解决：</strong>{joinList(structuredCase?.resolvedMissingFields)}</p>
@@ -148,7 +161,6 @@ export default function TracePage() {
                 <p><strong>VectorStore：</strong>{graph.retrievalResult?.vectorStoreSource ?? "-"}</p>
                 <p><strong>Reranker：</strong>{graph.retrievalResult?.rerankerSource ?? "-"}</p>
                 <p><strong>置信度：</strong>{graph.retrievalResult ? graph.retrievalResult.groundingConfidence.toFixed(2) : "-"}</p>
-                <p><strong>是否不足：</strong>{graph.retrievalResult?.insufficientGrounding ? "是" : graph.retrievalResult ? "否" : "-"}</p>
                 <p><strong>Top1：</strong>{topHits[0]?.title ?? "-"}</p>
               </article>
               <article className="insight-block">
@@ -194,6 +206,10 @@ export default function TracePage() {
                   </div>
                 </div>
                 <section className="object-block">
+                  <h3>GraphRuntime</h3>
+                  <pre>{JSON.stringify(graph.graphRuntime, null, 2)}</pre>
+                </section>
+                <section className="object-block">
                   <h3>StructuredCase</h3>
                   <pre>{JSON.stringify(graph.structuredCase, null, 2)}</pre>
                 </section>
@@ -208,7 +224,7 @@ export default function TracePage() {
                       {topHits.map((hit) => (
                         <article key={hit.id}>
                           <strong>{hit.title}</strong>
-                          <span>{hit.category} ｜ score {(hit.rerankScore ?? hit.score).toFixed(2)}</span>
+                          <span>{hit.category} · score {(hit.rerankScore ?? hit.score).toFixed(2)}</span>
                           <p>{short(hit.content)}</p>
                         </article>
                       ))}

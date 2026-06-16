@@ -1073,10 +1073,21 @@ async function runAfterSalesQaLoop(input: {
   };
 }
 
+function handoffTemplateText(handoffReason?: string, content?: string) {
+  const contextText = `${handoffReason ?? ""} ${content ?? ""}`;
+  const quotedIssue = content?.match(/关于您反馈的“([^”]+)”/)?.[1] ?? (content && content.length <= 80 ? content : undefined);
+
+  if (/直播|主播|直播承诺|赠品/.test(contextText)) {
+    const issueText = quotedIssue ? `关于您反馈的“${quotedIssue}”，` : "关于您反馈的直播承诺或赠品权益问题，";
+    return `您好，理解您的反馈。${issueText}这类场景需要结合订单信息、活动页面、商品详情页和平台权益展示由人工进一步核实。我不会直接确认主播承诺成立，也不会直接承诺补发、赔付或退差价；已为您转接人工客服继续处理，请稍候。`;
+  }
+  return "您好，当前情况需要人工进一步核实，正在为您转接人工客服，请稍候。";
+}
+
 export function templateOutputAgent(input: { routeType: RouteDecision["routeType"]; content?: string; handoffReason?: string }): TemplateOutputResult {
   const templateType = input.routeType === "general_service" ? "general_service" : input.routeType === "after_sales" ? "after_sales" : input.routeType === "needs_clarification" ? "clarification" : "handoff";
   const renderedText = templateType === "handoff"
-    ? "您好，当前情况需要人工进一步核实，正在为您转接人工客服，请稍候。"
+    ? handoffTemplateText(input.handoffReason, input.content)
     : input.content ?? "您好，为了准确处理您的问题，请补充商品信息、订单信息和具体诉求。";
   const validationErrors = evaluateReplySafety(renderedText, templateType === "general_service" ? "general_service_reply" : "after_sales_reply").failureReasons;
   const finalAction = templateType === "handoff" || validationErrors.length ? "handoff" : "send";

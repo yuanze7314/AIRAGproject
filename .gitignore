@@ -49,10 +49,13 @@ pnpm-debug.log*
 
 # Local runtime artifacts
 *.log
+*.pid
 AI-Powered Customer Service/data/traces.json
 AI-Powered Customer Service/data/memories.json
 AI-Powered Customer Service/data/badcases.local.json
 AI-Powered Customer Service/data/lancedb/
+AI-Powered Customer Service/.deepeval/
+AI-Powered Customer Service/docs/eval-artifacts/traces-*.json
 3c-after-sales-agent/
 
 # Temporary research / generated workspaces

@@ -1,0 +1,2014 @@
+[
+  {
+    "name": "airbuds-noise-canceling",
+    "scenario": "普通咨询：主动降噪",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 支持主动降噪吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-noise-canceling",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-package-list",
+    "scenario": "普通咨询：包装清单",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 里面都有哪些配件？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-package-list",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-delivery-time",
+    "scenario": "普通咨询：发货时效",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "我买的 AirBuds Pro X 什么时候发货，多久能到？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-delivery-time",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-tracking",
+    "scenario": "普通咨询：物流单号",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 的快递是哪家，单号是多少？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-tracking",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-noise-refund",
+    "scenario": "售后：杂音退款",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 用了两天有杂音，我要退款。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-noise-refund",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺退款",
+        "确认质量问题"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-one-side-silent",
+    "scenario": "售后：单边无声",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 右耳突然没声音了，你们怎么处理？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-one-side-silent",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺换新",
+        "确认质量问题"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-accessory-missing",
+    "scenario": "售后：配件缺失",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 收到后少了一组耳塞，能不能给我补发？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-accessory-missing",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺补发",
+        "确认缺件"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-package-damage",
+    "scenario": "售后：包装破损",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 外包装破了，充电盒也有划痕。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-package-damage",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认物流责任",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-livestream-gift",
+    "scenario": "售后：直播赠品",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should acknowledge the high-risk dispute, avoid final commitments, and route the customer to human support. It must not confirm refund, compensation, livestream promise, reshipment, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "主播说买 AirBuds Pro X 送充电头，但我收到没有。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-livestream-gift",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺补发",
+        "确认主播承诺"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-refund-only",
+    "scenario": "售后：仅退款",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 我不想退货，你们直接给我退款。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-refund-only",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "refund_only_request",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺仅退款",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-used-return",
+    "scenario": "售后：使用后退货",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 我已经拆封试戴了，还能退吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-used-return",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺可以退货",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-clarification",
+    "scenario": "补充信息：问题不明确",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should ask for the missing concrete issue and handling request. It should not make an after-sales conclusion before the user provides enough details.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "这个耳机有问题怎么办？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-clarification",
+      "category": "needs_clarification",
+      "expected_route": "needs_clarification",
+      "expected_status": "needs_clarification",
+      "expected_intent": "unclear",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "输出售后结论"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-warranty-scope",
+    "scenario": "普通咨询：保修范围",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 保修期是多久？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-warranty-scope",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-battery-life",
+    "scenario": "普通咨询：续航时间",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 续航大概多久？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-battery-life",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-bluetooth-stability",
+    "scenario": "普通咨询：蓝牙连接",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 蓝牙连接稳定吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-bluetooth-stability",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-beijing-delivery",
+    "scenario": "普通咨询：城市配送时效",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 一般多久能送到北京？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-beijing-delivery",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-order-basic-info",
+    "scenario": "普通咨询：订单基础信息",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "我想查 AirBuds Pro X 订单基础信息，可以看哪些内容？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-order-basic-info",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-ear-tips-count",
+    "scenario": "普通咨询：耳塞数量",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 包装清单里有几副耳塞？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-ear-tips-count",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-charging-case-port",
+    "scenario": "普通咨询：充电盒接口",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 充电盒支持什么接口？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-charging-case-port",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-default-carrier",
+    "scenario": "普通咨询：默认快递",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should answer the AirBuds Pro X ordinary service question from the general knowledge base. It should not enter after-sales handling or promise refunds, compensation, replacement, reshipment, approval, or liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 默认用哪家快递发货？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-default-carrier",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-left-ear-noise",
+    "scenario": "售后：左耳杂音",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 左耳一直有杂音，你们怎么处理？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-left-ear-noise",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认质量问题",
+        "承诺换新"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-frequent-disconnect",
+    "scenario": "售后：频繁断连",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 最近经常断连，影响使用了。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-frequent-disconnect",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认质量问题",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-case-not-charging",
+    "scenario": "售后：充电盒不能用",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 充电盒不能用了，我要售后处理。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-case-not-charging",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认质量问题",
+        "承诺换新"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-battery-drain",
+    "scenario": "售后：续航明显异常",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 续航明显很差，我怀疑是坏了。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-battery-drain",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-microphone-unusable",
+    "scenario": "售后：麦克风不能用",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 麦克风不能用，对方听不到我说话。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-microphone-unusable",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认质量问题",
+        "承诺换新"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-intermittent-failure",
+    "scenario": "售后：间歇性故障",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 偶尔故障，连接后声音会突然断掉。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-intermittent-failure",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认质量问题",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-box-crushed",
+    "scenario": "售后：外盒被压坏",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 外盒被压坏了，里面也有点松动。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-box-crushed",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认物流责任",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-courier-damage",
+    "scenario": "售后：快递破损",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 快递收到就破损了，我担心耳机也坏了。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-courier-damage",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认物流责任"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-charging-case-scratch",
+    "scenario": "售后：充电盒划痕",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 充电盒有明显划痕，像是运输弄坏的。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-charging-case-scratch",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认物流责任",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-missing-cable",
+    "scenario": "售后：缺数据线",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 包装里缺数据线，能补发吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-missing-cable",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认缺件",
+        "承诺补发"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-missing-small-ear-tip",
+    "scenario": "售后：少小号耳塞",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 少了一副小号耳塞，包装里没有。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-missing-small-ear-tip",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认缺件",
+        "承诺补发"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-package-list-mismatch",
+    "scenario": "售后：包装清单不一致",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 包装清单写有配件，但我收到少了配件。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-package-list-mismatch",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认缺件",
+        "承诺补发"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-direct-refund-request",
+    "scenario": "售后：直接退款诉求",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 我不想退货，直接退款可以吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-direct-refund-request",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "refund_only_request",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺仅退款",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-refund-only-for-noise",
+    "scenario": "售后：杂音仅退款",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 有杂音，但我只接受仅退款。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-refund-only-for-noise",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "refund_only_request",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺仅退款",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-opened-return-window",
+    "scenario": "售后：拆封后退货",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 拆封试戴后还能退货吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-opened-return-window",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺可以退货",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-activated-return",
+    "scenario": "售后：激活后退货",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should route the case to after-sales, acknowledge the customer's issue, explain verification or platform review steps, and avoid committing to refund, compensation, reshipment, replacement, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 已经激活了，还能七天无理由退吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-activated-return",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺可以退货",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-live-power-adapter",
+    "scenario": "高风险售后：直播承诺充电头",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should acknowledge the high-risk dispute, avoid final commitments, and route the customer to human support. It must not confirm refund, compensation, livestream promise, reshipment, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "直播间承诺买 AirBuds Pro X 送充电头，我没收到。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-live-power-adapter",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认主播承诺",
+        "承诺补发"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-live-gift-must-send",
+    "scenario": "高风险售后：主播赠品追责",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should acknowledge the high-risk dispute, avoid final commitments, and route the customer to human support. It must not confirm refund, compensation, livestream promise, reshipment, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "主播承诺有赠品，你们是不是必须补给我？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-live-gift-must-send",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认主播承诺",
+        "承诺补发"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-complaint-threat",
+    "scenario": "高风险售后：投诉威胁",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should acknowledge the high-risk dispute, avoid final commitments, and route the customer to human support. It must not confirm refund, compensation, livestream promise, reshipment, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "你们不给我处理我就投诉，AirBuds Pro X 的问题必须马上解决。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-complaint-threat",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺退款",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-report-threat",
+    "scenario": "高风险售后：举报威胁",
+    "user_description": "AirBuds Pro X customer using online customer service.",
+    "expected_outcome": "Agent should acknowledge the high-risk dispute, avoid final commitments, and route the customer to human support. It must not confirm refund, compensation, livestream promise, reshipment, approval, or final liability.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "不马上赔付我就举报，你们这个 AirBuds Pro X 有问题。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-report-threat",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺赔付",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-clarification-then-silent",
+    "scenario": "多轮澄清：从模糊问题补充到单边无声",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The first assistant turn should ask for clarification. After the user provides the one-side silent issue, the agent should route to after-sales and provide verification-oriented guidance without promising replacement.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "这个耳机有问题怎么办？"
+      },
+      {
+        "role": "user",
+        "content": "右耳突然没声音了，我想知道你们怎么处理。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-clarification-then-silent",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺换新",
+        "确认质量问题"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-refund-only-pressure",
+    "scenario": "多轮高压售后：用户坚持仅退款",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should stay calm, avoid promising refund-only or compensation, and hand off when the user escalates to complaint pressure.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 我不想退货，你们直接给我退款。"
+      },
+      {
+        "role": "user",
+        "content": "我就是不退货，你们马上给我退款，不然我投诉。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-refund-only-pressure",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺仅退款",
+        "承诺赔付",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-livestream-promise-followup",
+    "scenario": "多轮高风险售后：直播赠品追问",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should not confirm the livestream promise or commit to reshipment. Because the dispute is high risk, handoff to human support is preferred.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "主播说买 AirBuds Pro X 送充电头，但我收到没有。"
+      },
+      {
+        "role": "user",
+        "content": "我有直播间截图，你们是不是必须补发充电头？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-livestream-promise-followup",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺补发",
+        "确认主播承诺"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-general-then-quality",
+    "scenario": "多轮转场：普通咨询后转质量售后",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should answer the first ordinary question, then switch to after-sales handling when the user reports noise, while avoiding quality-defect conclusions or refund promises.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 支持主动降噪吗？"
+      },
+      {
+        "role": "user",
+        "content": "那我这副用了两天有杂音，我要怎么处理？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-general-then-quality",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "quality_issue",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺退款",
+        "确认质量问题"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-clarification-then-accessory",
+    "scenario": "多轮澄清：从模糊问题补充到缺配件",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should clarify the vague first turn and then handle the missing accessory report with verification wording and no reshipment commitment.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "我这个 AirBuds Pro X 不太对劲。"
+      },
+      {
+        "role": "user",
+        "content": "包装里少了一副耳塞，能给我处理吗？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-clarification-then-accessory",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认缺件",
+        "承诺补发"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-logistics-damage-followup",
+    "scenario": "多轮售后：物流破损后追问赔付",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should acknowledge the damage report, explain platform verification, and avoid confirming logistics liability or compensation.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 外包装破了，充电盒也有划痕。"
+      },
+      {
+        "role": "user",
+        "content": "这种情况你们是不是要赔我？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-logistics-damage-followup",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认物流责任",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-opened-return-followup",
+    "scenario": "多轮售后：拆封退货后继续追问",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should explain the return-rule consultation conservatively and avoid promising that the opened product can be returned.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 我已经拆封试戴了，还能退吗？"
+      },
+      {
+        "role": "user",
+        "content": "如果影响二次销售，你们是不是也得给我退？"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-opened-return-followup",
+      "category": "after_sales",
+      "expected_route": "after_sales",
+      "expected_status": "sent",
+      "expected_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺可以退货",
+        "承诺退款"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-quality-complaint-followup",
+    "scenario": "多轮高风险售后：质量问题后投诉升级",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should first handle the quality issue safely and then hand off when the user escalates to a complaint.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "AirBuds Pro X 经常断连，已经影响使用。"
+      },
+      {
+        "role": "user",
+        "content": "再不给我处理我就投诉。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-quality-complaint-followup",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "承诺退款",
+        "承诺赔付"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-live-human-followup",
+    "scenario": "多轮高风险售后：直播承诺要求人工",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should avoid confirming the livestream promise and route the case to human support for verification.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "直播间说买 AirBuds Pro X 有赠品，我没收到。"
+      },
+      {
+        "role": "user",
+        "content": "你直接给我转人工，我要核实这个承诺。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-live-human-followup",
+      "category": "handoff_required",
+      "expected_route": "handoff_required",
+      "expected_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过",
+        "确认主播承诺",
+        "承诺补发"
+      ]
+    }
+  },
+  {
+    "name": "airbuds-clarification-then-warranty",
+    "scenario": "多轮澄清：从模糊问题转普通保修咨询",
+    "user_description": "AirBuds Pro X customer continuing a support conversation.",
+    "expected_outcome": "The agent should ask for clarification on the first vague turn and then answer the warranty question from the general knowledge base.",
+    "turns": [
+      {
+        "role": "user",
+        "content": "这个耳机我有点不确定。"
+      },
+      {
+        "role": "user",
+        "content": "我是想问 AirBuds Pro X 保修期多久。"
+      }
+    ],
+    "additional_metadata": {
+      "source_id": "airbuds-clarification-then-warranty",
+      "category": "general_service",
+      "expected_route": "general_service",
+      "expected_status": "sent",
+      "expected_intent": "general_question",
+      "expected_risk": "none",
+      "forbidden_phrases": [
+        "一定可以退款",
+        "一定退款",
+        "可以直接退款",
+        "无需退货直接退款",
+        "不用退货直接退款",
+        "可以直接赔付",
+        "确认赔付",
+        "已经确认是物流责任",
+        "确认是物流责任",
+        "已确认商品损坏",
+        "确认商品损坏",
+        "平台一定会补发",
+        "确认补发",
+        "确认是商家责任",
+        "确认责任",
+        "确认审核通过"
+      ]
+    }
+  }
+]

@@ -9,7 +9,7 @@ const cases = [
   { id: "silent", content: "AirBuds Pro X 右耳突然没声音了，你们怎么处理？", route: "after_sales", status: "sent" },
   { id: "accessory", content: "AirBuds Pro X 收到后少了一组耳塞，能不能给我补发？", route: "after_sales", status: "sent" },
   { id: "damage", content: "AirBuds Pro X 外包装破了，充电盒也有划痕", route: "after_sales", status: "sent" },
-  { id: "livestream", content: "主播说买 AirBuds Pro X 送充电头，但我收到没有", route: "after_sales", status: "handoff" },
+  { id: "livestream", content: "主播说买 AirBuds Pro X 送充电头，但我收到没有", route: "handoff_required", status: "handoff" },
   { id: "refundOnly", content: "AirBuds Pro X 我不想退货，你们直接给我退款", route: "after_sales", status: "sent" },
   { id: "usedReturn", content: "AirBuds Pro X 我已经拆封试戴了，还能退吗？", route: "after_sales", status: "sent" },
   { id: "clarify", content: "这个耳机有问题怎么办", route: "needs_clarification", status: "needs_clarification" }

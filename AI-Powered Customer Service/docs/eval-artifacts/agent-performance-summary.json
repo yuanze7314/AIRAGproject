@@ -1,0 +1,1606 @@
+{
+  "summary": {
+    "generated_at": "2026-06-15T12:55:22.379Z",
+    "base_url": "http://127.0.0.1:3004",
+    "dataset_path": "E:\\Agent项目\\skill专题\\AI-Powered Customer Service\\tests\\evals\\.dataset.json",
+    "total_cases": 50,
+    "total_turns": 60,
+    "contract_passed": 48,
+    "contract_pass_rate": 0.96,
+    "route_accuracy": 0.98,
+    "status_accuracy": 0.98,
+    "intent_accuracy": 1.0,
+    "forbidden_pass_rate": 1.0,
+    "error_count": 0,
+    "error_rate": 0,
+    "avg_turn_latency_ms": 17603.06,
+    "p50_turn_latency_ms": 17316.37,
+    "p95_turn_latency_ms": 26704.14,
+    "max_turn_latency_ms": 38988.4,
+    "avg_trace_event_count": 28.02,
+    "avg_agent_count": 7.38,
+    "route_distribution": {
+      "general_service": 13,
+      "after_sales": 27,
+      "handoff_required": 9,
+      "needs_clarification": 1
+    },
+    "status_distribution": {
+      "sent": 40,
+      "handoff": 9,
+      "needs_clarification": 1
+    },
+    "risk_distribution": {
+      "none": 14,
+      "medium": 24,
+      "high": 12
+    },
+    "failed_cases": [
+      {
+        "name": "airbuds-livestream-gift",
+        "error": null,
+        "expected_route": "handoff_required",
+        "actual_route": "after_sales",
+        "expected_status": "handoff",
+        "actual_status": "handoff",
+        "expected_intent": "livestream_promise_dispute",
+        "actual_intent": "livestream_promise_dispute",
+        "forbidden_hits": []
+      },
+      {
+        "name": "airbuds-order-basic-info",
+        "error": null,
+        "expected_route": "general_service",
+        "actual_route": "general_service",
+        "expected_status": "sent",
+        "actual_status": "handoff",
+        "expected_intent": "general_question",
+        "actual_intent": "general_question",
+        "forbidden_hits": []
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "airbuds-noise-canceling",
+      "scenario": "普通咨询：主动降噪",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 支持主动降噪吗？",
+          "ok": true,
+          "elapsed_ms": 11263.94
+        }
+      ],
+      "total_elapsed_ms": 11263.94,
+      "final_elapsed_ms": 11263.94,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-package-list",
+      "scenario": "普通咨询：包装清单",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 里面都有哪些配件？",
+          "ok": true,
+          "elapsed_ms": 13167.82
+        }
+      ],
+      "total_elapsed_ms": 13167.82,
+      "final_elapsed_ms": 13167.82,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-delivery-time",
+      "scenario": "普通咨询：发货时效",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "我买的 AirBuds Pro X 什么时候发货，多久能到？",
+          "ok": true,
+          "elapsed_ms": 9314.61
+        }
+      ],
+      "total_elapsed_ms": 9314.61,
+      "final_elapsed_ms": 9314.61,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-tracking",
+      "scenario": "普通咨询：物流单号",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 的快递是哪家，单号是多少？",
+          "ok": true,
+          "elapsed_ms": 12111.78
+        }
+      ],
+      "total_elapsed_ms": 12111.78,
+      "final_elapsed_ms": 12111.78,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-noise-refund",
+      "scenario": "售后：杂音退款",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 用了两天有杂音，我要退款。",
+          "ok": true,
+          "elapsed_ms": 30965.41
+        }
+      ],
+      "total_elapsed_ms": 30965.41,
+      "final_elapsed_ms": 30965.41,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-one-side-silent",
+      "scenario": "售后：单边无声",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 右耳突然没声音了，你们怎么处理？",
+          "ok": true,
+          "elapsed_ms": 22804.97
+        }
+      ],
+      "total_elapsed_ms": 22804.97,
+      "final_elapsed_ms": 22804.97,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-accessory-missing",
+      "scenario": "售后：配件缺失",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "accessory_missing",
+      "actual_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 收到后少了一组耳塞，能不能给我补发？",
+          "ok": true,
+          "elapsed_ms": 17555.69
+        }
+      ],
+      "total_elapsed_ms": 17555.69,
+      "final_elapsed_ms": 17555.69,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-package-damage",
+      "scenario": "售后：包装破损",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "logistics_damage",
+      "actual_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 外包装破了，充电盒也有划痕。",
+          "ok": true,
+          "elapsed_ms": 17316.13
+        }
+      ],
+      "total_elapsed_ms": 17316.13,
+      "final_elapsed_ms": 17316.13,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-livestream-gift",
+      "scenario": "售后：直播赠品",
+      "turns": 1,
+      "expected_route": "handoff_required",
+      "actual_route": "after_sales",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "actual_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "route_passed": false,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "主播说买 AirBuds Pro X 送充电头，但我收到没有。",
+          "ok": true,
+          "elapsed_ms": 25331.51
+        }
+      ],
+      "total_elapsed_ms": 25331.51,
+      "final_elapsed_ms": 25331.51,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-refund-only",
+      "scenario": "售后：仅退款",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "refund_only_request",
+      "actual_intent": "refund_only_request",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 我不想退货，你们直接给我退款。",
+          "ok": true,
+          "elapsed_ms": 18283.94
+        }
+      ],
+      "total_elapsed_ms": 18283.94,
+      "final_elapsed_ms": 18283.94,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-used-return",
+      "scenario": "售后：使用后退货",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "rule_consultation",
+      "actual_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 我已经拆封试戴了，还能退吗？",
+          "ok": true,
+          "elapsed_ms": 17316.37
+        }
+      ],
+      "total_elapsed_ms": 17316.37,
+      "final_elapsed_ms": 17316.37,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-clarification",
+      "scenario": "补充信息：问题不明确",
+      "turns": 1,
+      "expected_route": "needs_clarification",
+      "actual_route": "needs_clarification",
+      "expected_status": "needs_clarification",
+      "actual_status": "needs_clarification",
+      "expected_intent": "unclear",
+      "actual_intent": "unclear",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "这个耳机有问题怎么办？",
+          "ok": true,
+          "elapsed_ms": 14022.15
+        }
+      ],
+      "total_elapsed_ms": 14022.15,
+      "final_elapsed_ms": 14022.15,
+      "trace_event_count": 18,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-warranty-scope",
+      "scenario": "普通咨询：保修范围",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 保修期是多久？",
+          "ok": true,
+          "elapsed_ms": 15004
+        }
+      ],
+      "total_elapsed_ms": 15004,
+      "final_elapsed_ms": 15004,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-battery-life",
+      "scenario": "普通咨询：续航时间",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 续航大概多久？",
+          "ok": true,
+          "elapsed_ms": 12050.65
+        }
+      ],
+      "total_elapsed_ms": 12050.65,
+      "final_elapsed_ms": 12050.65,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-bluetooth-stability",
+      "scenario": "普通咨询：蓝牙连接",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 蓝牙连接稳定吗？",
+          "ok": true,
+          "elapsed_ms": 12704.15
+        }
+      ],
+      "total_elapsed_ms": 12704.15,
+      "final_elapsed_ms": 12704.15,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-beijing-delivery",
+      "scenario": "普通咨询：城市配送时效",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 一般多久能送到北京？",
+          "ok": true,
+          "elapsed_ms": 19428.03
+        }
+      ],
+      "total_elapsed_ms": 19428.03,
+      "final_elapsed_ms": 19428.03,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-order-basic-info",
+      "scenario": "普通咨询：订单基础信息",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "handoff",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": false,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "我想查 AirBuds Pro X 订单基础信息，可以看哪些内容？",
+          "ok": true,
+          "elapsed_ms": 19165.35
+        }
+      ],
+      "total_elapsed_ms": 19165.35,
+      "final_elapsed_ms": 19165.35,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-ear-tips-count",
+      "scenario": "普通咨询：耳塞数量",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 包装清单里有几副耳塞？",
+          "ok": true,
+          "elapsed_ms": 11069.43
+        }
+      ],
+      "total_elapsed_ms": 11069.43,
+      "final_elapsed_ms": 11069.43,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-charging-case-port",
+      "scenario": "普通咨询：充电盒接口",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 充电盒支持什么接口？",
+          "ok": true,
+          "elapsed_ms": 12045.55
+        }
+      ],
+      "total_elapsed_ms": 12045.55,
+      "final_elapsed_ms": 12045.55,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-default-carrier",
+      "scenario": "普通咨询：默认快递",
+      "turns": 1,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 默认用哪家快递发货？",
+          "ok": true,
+          "elapsed_ms": 12193.65
+        }
+      ],
+      "total_elapsed_ms": 12193.65,
+      "final_elapsed_ms": 12193.65,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    },
+    {
+      "name": "airbuds-left-ear-noise",
+      "scenario": "售后：左耳杂音",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 左耳一直有杂音，你们怎么处理？",
+          "ok": true,
+          "elapsed_ms": 18651.04
+        }
+      ],
+      "total_elapsed_ms": 18651.04,
+      "final_elapsed_ms": 18651.04,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-frequent-disconnect",
+      "scenario": "售后：频繁断连",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 最近经常断连，影响使用了。",
+          "ok": true,
+          "elapsed_ms": 18594.97
+        }
+      ],
+      "total_elapsed_ms": 18594.97,
+      "final_elapsed_ms": 18594.97,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-case-not-charging",
+      "scenario": "售后：充电盒不能用",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 充电盒不能用了，我要售后处理。",
+          "ok": true,
+          "elapsed_ms": 17516.95
+        }
+      ],
+      "total_elapsed_ms": 17516.95,
+      "final_elapsed_ms": 17516.95,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-battery-drain",
+      "scenario": "售后：续航明显异常",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 续航明显很差，我怀疑是坏了。",
+          "ok": true,
+          "elapsed_ms": 26704.14
+        }
+      ],
+      "total_elapsed_ms": 26704.14,
+      "final_elapsed_ms": 26704.14,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-microphone-unusable",
+      "scenario": "售后：麦克风不能用",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 麦克风不能用，对方听不到我说话。",
+          "ok": true,
+          "elapsed_ms": 17614.48
+        }
+      ],
+      "total_elapsed_ms": 17614.48,
+      "final_elapsed_ms": 17614.48,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-intermittent-failure",
+      "scenario": "售后：间歇性故障",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 偶尔故障，连接后声音会突然断掉。",
+          "ok": true,
+          "elapsed_ms": 18286.01
+        }
+      ],
+      "total_elapsed_ms": 18286.01,
+      "final_elapsed_ms": 18286.01,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-box-crushed",
+      "scenario": "售后：外盒被压坏",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "logistics_damage",
+      "actual_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 外盒被压坏了，里面也有点松动。",
+          "ok": true,
+          "elapsed_ms": 17307.84
+        }
+      ],
+      "total_elapsed_ms": 17307.84,
+      "final_elapsed_ms": 17307.84,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-courier-damage",
+      "scenario": "售后：快递破损",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "logistics_damage",
+      "actual_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 快递收到就破损了，我担心耳机也坏了。",
+          "ok": true,
+          "elapsed_ms": 19086.4
+        }
+      ],
+      "total_elapsed_ms": 19086.4,
+      "final_elapsed_ms": 19086.4,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-charging-case-scratch",
+      "scenario": "售后：充电盒划痕",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "logistics_damage",
+      "actual_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 充电盒有明显划痕，像是运输弄坏的。",
+          "ok": true,
+          "elapsed_ms": 24993.86
+        }
+      ],
+      "total_elapsed_ms": 24993.86,
+      "final_elapsed_ms": 24993.86,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-missing-cable",
+      "scenario": "售后：缺数据线",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "accessory_missing",
+      "actual_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 包装里缺数据线，能补发吗？",
+          "ok": true,
+          "elapsed_ms": 16209.59
+        }
+      ],
+      "total_elapsed_ms": 16209.59,
+      "final_elapsed_ms": 16209.59,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-missing-small-ear-tip",
+      "scenario": "售后：少小号耳塞",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "accessory_missing",
+      "actual_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 少了一副小号耳塞，包装里没有。",
+          "ok": true,
+          "elapsed_ms": 18639.93
+        }
+      ],
+      "total_elapsed_ms": 18639.93,
+      "final_elapsed_ms": 18639.93,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-package-list-mismatch",
+      "scenario": "售后：包装清单不一致",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "accessory_missing",
+      "actual_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 包装清单写有配件，但我收到少了配件。",
+          "ok": true,
+          "elapsed_ms": 32622.23
+        }
+      ],
+      "total_elapsed_ms": 32622.23,
+      "final_elapsed_ms": 32622.23,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-direct-refund-request",
+      "scenario": "售后：直接退款诉求",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "refund_only_request",
+      "actual_intent": "refund_only_request",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 我不想退货，直接退款可以吗？",
+          "ok": true,
+          "elapsed_ms": 18440.79
+        }
+      ],
+      "total_elapsed_ms": 18440.79,
+      "final_elapsed_ms": 18440.79,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-refund-only-for-noise",
+      "scenario": "售后：杂音仅退款",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "refund_only_request",
+      "actual_intent": "refund_only_request",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 有杂音，但我只接受仅退款。",
+          "ok": true,
+          "elapsed_ms": 21665.9
+        }
+      ],
+      "total_elapsed_ms": 21665.9,
+      "final_elapsed_ms": 21665.9,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-opened-return-window",
+      "scenario": "售后：拆封后退货",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "rule_consultation",
+      "actual_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 拆封试戴后还能退货吗？",
+          "ok": true,
+          "elapsed_ms": 16880.76
+        }
+      ],
+      "total_elapsed_ms": 16880.76,
+      "final_elapsed_ms": 16880.76,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-activated-return",
+      "scenario": "售后：激活后退货",
+      "turns": 1,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "rule_consultation",
+      "actual_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 已经激活了，还能七天无理由退吗？",
+          "ok": true,
+          "elapsed_ms": 17921.14
+        }
+      ],
+      "total_elapsed_ms": 17921.14,
+      "final_elapsed_ms": 17921.14,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-live-power-adapter",
+      "scenario": "高风险售后：直播承诺充电头",
+      "turns": 1,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "actual_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "直播间承诺买 AirBuds Pro X 送充电头，我没收到。",
+          "ok": true,
+          "elapsed_ms": 12913.12
+        }
+      ],
+      "total_elapsed_ms": 12913.12,
+      "final_elapsed_ms": 12913.12,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-live-gift-must-send",
+      "scenario": "高风险售后：主播赠品追责",
+      "turns": 1,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "actual_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "主播承诺有赠品，你们是不是必须补给我？",
+          "ok": true,
+          "elapsed_ms": 8396.46
+        }
+      ],
+      "total_elapsed_ms": 8396.46,
+      "final_elapsed_ms": 8396.46,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-complaint-threat",
+      "scenario": "高风险售后：投诉威胁",
+      "turns": 1,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "actual_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "你们不给我处理我就投诉，AirBuds Pro X 的问题必须马上解决。",
+          "ok": true,
+          "elapsed_ms": 8311.48
+        }
+      ],
+      "total_elapsed_ms": 8311.48,
+      "final_elapsed_ms": 8311.48,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-report-threat",
+      "scenario": "高风险售后：举报威胁",
+      "turns": 1,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "actual_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "不马上赔付我就举报，你们这个 AirBuds Pro X 有问题。",
+          "ok": true,
+          "elapsed_ms": 12651.43
+        }
+      ],
+      "total_elapsed_ms": 12651.43,
+      "final_elapsed_ms": 12651.43,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-clarification-then-silent",
+      "scenario": "多轮澄清：从模糊问题补充到单边无声",
+      "turns": 2,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "这个耳机有问题怎么办？",
+          "ok": true,
+          "elapsed_ms": 15060.55
+        },
+        {
+          "user_message": "右耳突然没声音了，我想知道你们怎么处理。",
+          "ok": true,
+          "elapsed_ms": 22016.34
+        }
+      ],
+      "total_elapsed_ms": 37076.89,
+      "final_elapsed_ms": 22016.34,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-refund-only-pressure",
+      "scenario": "多轮高压售后：用户坚持仅退款",
+      "turns": 2,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "actual_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 我不想退货，你们直接给我退款。",
+          "ok": true,
+          "elapsed_ms": 18502.14
+        },
+        {
+          "user_message": "我就是不退货，你们马上给我退款，不然我投诉。",
+          "ok": true,
+          "elapsed_ms": 20177.54
+        }
+      ],
+      "total_elapsed_ms": 38679.68,
+      "final_elapsed_ms": 20177.54,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-livestream-promise-followup",
+      "scenario": "多轮高风险售后：直播赠品追问",
+      "turns": 2,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "actual_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "主播说买 AirBuds Pro X 送充电头，但我收到没有。",
+          "ok": true,
+          "elapsed_ms": 12074.21
+        },
+        {
+          "user_message": "我有直播间截图，你们是不是必须补发充电头？",
+          "ok": true,
+          "elapsed_ms": 11316.01
+        }
+      ],
+      "total_elapsed_ms": 23390.22,
+      "final_elapsed_ms": 11316.01,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-general-then-quality",
+      "scenario": "多轮转场：普通咨询后转质量售后",
+      "turns": 2,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "quality_issue",
+      "actual_intent": "quality_issue",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 支持主动降噪吗？",
+          "ok": true,
+          "elapsed_ms": 13171.4
+        },
+        {
+          "user_message": "那我这副用了两天有杂音，我要怎么处理？",
+          "ok": true,
+          "elapsed_ms": 22487.37
+        }
+      ],
+      "total_elapsed_ms": 35658.77,
+      "final_elapsed_ms": 22487.37,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-clarification-then-accessory",
+      "scenario": "多轮澄清：从模糊问题补充到缺配件",
+      "turns": 2,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "accessory_missing",
+      "actual_intent": "accessory_missing",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "我这个 AirBuds Pro X 不太对劲。",
+          "ok": true,
+          "elapsed_ms": 11059.55
+        },
+        {
+          "user_message": "包装里少了一副耳塞，能给我处理吗？",
+          "ok": true,
+          "elapsed_ms": 38988.4
+        }
+      ],
+      "total_elapsed_ms": 50047.95,
+      "final_elapsed_ms": 38988.4,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-logistics-damage-followup",
+      "scenario": "多轮售后：物流破损后追问赔付",
+      "turns": 2,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "logistics_damage",
+      "actual_intent": "logistics_damage",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 外包装破了，充电盒也有划痕。",
+          "ok": true,
+          "elapsed_ms": 19654.25
+        },
+        {
+          "user_message": "这种情况你们是不是要赔我？",
+          "ok": true,
+          "elapsed_ms": 25700.44
+        }
+      ],
+      "total_elapsed_ms": 45354.69,
+      "final_elapsed_ms": 25700.44,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-opened-return-followup",
+      "scenario": "多轮售后：拆封退货后继续追问",
+      "turns": 2,
+      "expected_route": "after_sales",
+      "actual_route": "after_sales",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "rule_consultation",
+      "actual_intent": "rule_consultation",
+      "expected_risk": "medium",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 我已经拆封试戴了，还能退吗？",
+          "ok": true,
+          "elapsed_ms": 15053.32
+        },
+        {
+          "user_message": "如果影响二次销售，你们是不是也得给我退？",
+          "ok": true,
+          "elapsed_ms": 26471.95
+        }
+      ],
+      "total_elapsed_ms": 41525.27,
+      "final_elapsed_ms": 26471.95,
+      "trace_event_count": 32,
+      "agent_count": 8,
+      "knowledge_base": "after_sales"
+    },
+    {
+      "name": "airbuds-quality-complaint-followup",
+      "scenario": "多轮高风险售后：质量问题后投诉升级",
+      "turns": 2,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "complaint_escalation",
+      "actual_intent": "complaint_escalation",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "AirBuds Pro X 经常断连，已经影响使用。",
+          "ok": true,
+          "elapsed_ms": 15902.94
+        },
+        {
+          "user_message": "再不给我处理我就投诉。",
+          "ok": true,
+          "elapsed_ms": 24166.67
+        }
+      ],
+      "total_elapsed_ms": 40069.61,
+      "final_elapsed_ms": 24166.67,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-live-human-followup",
+      "scenario": "多轮高风险售后：直播承诺要求人工",
+      "turns": 2,
+      "expected_route": "handoff_required",
+      "actual_route": "handoff_required",
+      "expected_status": "handoff",
+      "actual_status": "handoff",
+      "expected_intent": "livestream_promise_dispute",
+      "actual_intent": "livestream_promise_dispute",
+      "expected_risk": "high",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "直播间说买 AirBuds Pro X 有赠品，我没收到。",
+          "ok": true,
+          "elapsed_ms": 12203.17
+        },
+        {
+          "user_message": "你直接给我转人工，我要核实这个承诺。",
+          "ok": true,
+          "elapsed_ms": 10607.18
+        }
+      ],
+      "total_elapsed_ms": 22810.35,
+      "final_elapsed_ms": 10607.18,
+      "trace_event_count": 17,
+      "agent_count": 6
+    },
+    {
+      "name": "airbuds-clarification-then-warranty",
+      "scenario": "多轮澄清：从模糊问题转普通保修咨询",
+      "turns": 2,
+      "expected_route": "general_service",
+      "actual_route": "general_service",
+      "expected_status": "sent",
+      "actual_status": "sent",
+      "expected_intent": "general_question",
+      "actual_intent": "general_question",
+      "expected_risk": "none",
+      "route_passed": true,
+      "status_passed": true,
+      "intent_passed": true,
+      "forbidden_passed": true,
+      "forbidden_hits": [],
+      "error": null,
+      "turn_results": [
+        {
+          "user_message": "这个耳机我有点不确定。",
+          "ok": true,
+          "elapsed_ms": 15395.42
+        },
+        {
+          "user_message": "我是想问 AirBuds Pro X 保修期多久。",
+          "ok": true,
+          "elapsed_ms": 19651.04
+        }
+      ],
+      "total_elapsed_ms": 35046.46,
+      "final_elapsed_ms": 19651.04,
+      "trace_event_count": 27,
+      "agent_count": 7,
+      "knowledge_base": "general"
+    }
+  ]
+}

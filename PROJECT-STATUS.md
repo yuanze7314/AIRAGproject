@@ -1,6 +1,6 @@
 # 项目状态：AI-Powered Customer Service
 
-更新时间：2026-06-14
+更新时间：2026-06-16
 
 ## 仓库说明
 
@@ -38,6 +38,9 @@ memoryRead
 - 首页已支持实时流程节点状态，`/trace` 页面已展示 Graph runtime 摘要和 fallback 信息。
 - `/trace` 页面已重写为干净中文版本，并支持新 graph node 事件展示。
 - 售后、普通客服、澄清、转人工四条分支仍保持原有 API 行为。
+- 已补充 DeepEval 本地评测链路、50 条会话测试集、知识库质量测试、性能统计脚本和评测报告。
+- 已修复包装清单知识库乱码，并调整配件缺失、物流破损、质量问题、直播承诺争议等规则描述。
+- 直播承诺或赠品权益场景的转人工模板已明确说明不会确认主播承诺成立，也不会直接承诺补发、赔付或退差价。
 
 ## 当前关键文件
 
@@ -50,6 +53,10 @@ memoryRead
 - `AI-Powered Customer Service/app/trace/page.tsx`
 - `AI-Powered Customer Service/app/api/chat/stream/route.ts`
 - `AI-Powered Customer Service/scripts/graph-state-test.mjs`
+- `AI-Powered Customer Service/scripts/build-deepeval-dataset.mjs`
+- `AI-Powered Customer Service/scripts/eval-performance.mjs`
+- `AI-Powered Customer Service/scripts/knowledge-quality-test.mjs`
+- `AI-Powered Customer Service/tests/evals/test_airbuds_customer_service.py`
 
 ## 已验证
 
@@ -57,23 +64,23 @@ memoryRead
 
 ```powershell
 npm run test:graph
+npm run test:knowledge
 npm run build
+npm run smoke
 ```
 
-最终收口前还需要补跑：
-
-```powershell
-SMOKE_BASE_URL=http://127.0.0.1:3001 npm run smoke
-```
+本地评测材料显示：50 条测试集、接口 smoke 12/12 通过、契约通过率 96.00%、路由准确率 98.00%、状态准确率 98.00%、意图准确率 100.00%、禁用承诺通过率 100.00%、错误率 0.00%。DeepEval 本地运行结果为 39 通过 / 11 未通过，未通过项主要用于定位话术完整度、轮次相关性和测试契约对齐。
 
 ## 当前风险
 
 - `MemorySaver` 是内存 checkpointer，不适合作为跨进程持久化恢复方案。
 - `npm audit` 已知存在 Next/PostCSS 相关 moderate 提示，自动修复会触发破坏性版本变更，应单独处理。
+- DeepEval 当前使用 DeepSeek 单一裁判模型，结果适合阶段性背书，不应表述为第三方认证或生产 SLA。
+- 个别失败样本仍提示需要继续优化话术完整度、轮次相关性和测试契约。
 
 ## 后续建议
 
-1. 补跑完整 smoke 并清理本地 JSON 测试数据。
+1. 继续修复 DeepEval 失败样本，优先处理仅退款高压、质量投诉升级和保修咨询检索偏差。
 2. 如果需要跨请求恢复，替换为持久化 LangGraph checkpointer。
 3. 继续强化节点级 fallback，优先覆盖 RAG 与 LLM judge 的局部重试。
-4. 继续做移动端细节、客服快捷操作和 trace 过滤。
+4. 增加人工抽检记录，补充高风险售后场景的人工评审口径。

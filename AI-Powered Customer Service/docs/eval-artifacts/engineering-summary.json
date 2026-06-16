@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-06-15T21:25:00+08:00",
+  "commands": [
+    {
+      "command": "npm run eval:dataset",
+      "exit_code": 0,
+      "note": "生成 50 条 DeepEval 会话黄金用例"
+    },
+    {
+      "command": "python -m py_compile scripts/generate-word-evaluation-report.py tests/evals/*.py",
+      "exit_code": 0,
+      "note": "评测与报告 Python 脚本语法检查通过"
+    },
+    {
+      "command": "node --check scripts/build-deepeval-dataset.mjs scripts/eval-performance.mjs scripts/smoke-test.mjs",
+      "exit_code": 0,
+      "note": "评测相关 Node.js 脚本语法检查通过"
+    },
+    {
+      "command": "npm run build:index",
+      "exit_code": 0,
+      "note": "知识库索引构建通过，生成 13 个知识切片"
+    },
+    {
+      "command": "npm run test:graph",
+      "exit_code": 0,
+      "note": "智能体图状态测试通过"
+    },
+    {
+      "command": "npm run test:knowledge",
+      "exit_code": 0,
+      "note": "知识库质量测试通过"
+    },
+    {
+      "command": "SMOKE_BASE_URL=http://127.0.0.1:3004 npm run smoke",
+      "exit_code": 0,
+      "note": "接口冒烟测试 12/12 通过"
+    },
+    {
+      "command": "CUSTOMER_SERVICE_BASE_URL=http://127.0.0.1:3004 npm run eval:performance",
+      "exit_code": 0,
+      "note": "50 条 / 60 轮性能统计完成，错误率 0%"
+    },
+    {
+      "command": "deepeval test run tests/evals/test_airbuds_customer_service.py --identifier airbuds-three-layer-50-local",
+      "exit_code": 1,
+      "note": "DeepEval 执行完成，39 个通过、11 个失败；随后 Rich 控制台组件在 Windows GBK 环境渲染时触发 Unicode 编码错误"
+    }
+  ]
+}

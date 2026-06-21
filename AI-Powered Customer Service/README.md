@@ -1,101 +1,114 @@
 # AI-Powered Customer Service
 
-AI-Powered Customer Service 是一个面向 AirBuds Pro X 3C 售后场景的智能客服 Agent MVP。项目基于 Next.js，采用确定性 Agent Graph 编排、route-scoped RAG Service、本地 knowledge-index、Review/QA 安全闸门和本地 demo store。
+AI-Powered Customer Service 是一个面向 3C 售后场景的智能客服 Agent 项目，当前以 AirBuds Pro X 为演示商品。项目使用 Next.js 构建客服界面，后台采用 LangGraph 风格的 Agent 编排流程，完成上下文理解、路由判断、知识检索、售后策略、回复生成、安全审查和最终输出。
 
-它的目标是展示一个可运行、可观测、可评测的智能客服系统：普通咨询直接回答，售后问题进入规则约束流程，模糊问题先澄清，高风险争议转人工。
+项目目标是提供一个简洁可运行的客服对话系统：用户在前端输入问题，后台按既定 Agent 链路处理，并输出安全、克制、可追踪的客服回复。
 
 ## 核心能力
 
-- 普通客服：回答包装清单、续航、降噪、发货、物流查询等基础问题。
-- 售后处理：识别质量问题、配件缺失、物流破损、仅退款、拆封退货和规则咨询等场景。
-- 高风险转人工：直播承诺、投诉升级、强压退款等场景优先转人工。
-- RAG 检索：按路由隔离通用知识库与售后规则库，避免普通咨询和售后规则相互污染。
-- 安全模板：转人工或兜底时输出保守话术，避免越权承诺。
-- 运行追踪：API 返回 trace events、agent summaries、route/status/intent、检索结果和 QA 结果。
-- 本地评测：内置 DeepEval 会话测试、知识库质量测试、接口 smoke 和性能统计脚本。
+- 简洁客服对话界面，突出用户提问和客服回复。
+- 上下文与路由节点识别普通咨询、售后处理、补充信息和人工转接。
+- 普通知识库与售后规则库按路由隔离，避免不同业务口径互相污染。
+- 售后链路覆盖质量问题、配件缺失、物流破损、仅退款、激活/拆封争议和直播承诺争议。
+- 回复输出前进行安全审查，避免直接承诺退款、赔付、补发、审核通过或最终责任判定。
+- 高风险或争议场景采用保守话术，并优先转人工继续处理。
+- 后台保留路由、检索、节点摘要和最终状态，方便查看 Agent 执行过程。
 
-## 快速开始
+## Agent 架构
+
+```mermaid
+flowchart TD
+  A["客服对话界面"] --> B["API Route"]
+  B --> C["LangGraph Runtime"]
+  C --> D["上下文与路由节点"]
+  D --> E{"Route Type"}
+  E -->|general_service| F["普通客服 RAG"]
+  F --> G["普通回复节点"]
+  E -->|after_sales| H["规则 RAG + 风险策略节点"]
+  H --> I["售后回复节点"]
+  E -->|needs_clarification| J["澄清节点"]
+  E -->|handoff_required| K["人工转接节点"]
+  G --> L["回复审查 / QA 节点"]
+  I --> L
+  J --> M["模板输出节点"]
+  K --> M
+  L --> M
+  M --> N["客户可见回复"]
+```
+
+整体流程保持保守：普通问题只从普通客服知识库回答；售后问题进入规则、风险策略、回复生成、QA 和模板输出链路；直播承诺、投诉升级、强争议等场景优先转人工，不在系统内直接给出处置承诺。
+
+## Agent 可用工具
+
+- `knowledge.retrieve`：检索商品规格、包装清单、订单基础信息、发货和物流等普通客服知识。
+- `rule.retrieve`：检索退款、破损、质量、配件、激活、直播争议等售后规则。
+- `example.retrieve`：为售后策略提供参考处理样例。
+- `template.retrieve`：为最终回复提供客服话术模板。
+- `llm.judge`：对草稿回复进行安全审查。
+- `badcase.lookup`：查询已知风险模式，辅助避免重复输出问题话术。
+
+## 本地运行
 
 ```powershell
 npm install
+Copy-Item .env.example .env.local
 npm run build:index
-npm run build
 npm run dev
 ```
 
-默认开发地址：
+默认访问地址：
 
 ```text
 http://127.0.0.1:3000
 ```
 
-## 验证
+如需调用 DeepSeek，请在 `.env.local` 中配置：
 
-基础检查：
-
-```powershell
-npm run smoke:index
-npm run test:graph
-npm run test:knowledge
+```text
+DEEPSEEK_API_KEY=
+DEEPSEEK_MODEL=deepseek-v4-flash
+DEEPSEEK_API_BASE_URL=https://api.deepseek.com
 ```
 
-如需跑端到端 smoke：
+如需使用本地确定性演示模式，可设置：
 
-```powershell
-npm run start -- --port 3001
-$env:SMOKE_BASE_URL="http://127.0.0.1:3001"
-npm run smoke
+```text
+DEEPSEEK_DISABLED=1
 ```
 
-如需生成评测数据集与性能统计：
+## 常用命令
 
 ```powershell
-npm run eval:dataset
-$env:CUSTOMER_SERVICE_BASE_URL="http://127.0.0.1:3001"
-npm run eval:performance
+npm run dev          # 启动本地开发服务
+npm run build        # 构建 Next.js 应用
+npm run start        # 启动构建后的服务
+npm run build:index  # 重建本地知识索引
 ```
 
-如需运行 DeepEval 端到端语义评测，请先安装评测依赖并配置 DeepSeek API Key：
+可选 reranker 服务：
 
 ```powershell
-python -m pip install -r requirements-evals.txt
-$env:CUSTOMER_SERVICE_BASE_URL="http://127.0.0.1:3001"
-$env:DEEPEVAL_DEEPSEEK_MODEL="deepseek-chat"
-deepeval test run tests/evals/test_airbuds_customer_service.py --identifier "airbuds-local"
+npm run reranker:install
+npm run reranker:start
 ```
 
-## 评测说明
+## 目录结构
 
-当前版本包含三层评测：
+```text
+app/                    Next.js 页面和 API routes
+lib/agent/              Agent 编排、图节点、路由、QA 和模板逻辑
+lib/rag/                检索、打分、规则读取和知识服务
+knowledge/              普通客服知识与售后规则源文件
+data/knowledge-index.json
+                        生成后的本地知识索引
+scripts/                索引构建、本地辅助脚本和服务脚本
+docs/                   架构说明与开发文档
+```
 
-| 层级 | 内容 |
-| --- | --- |
-| 工程链路 | 语法检查、知识库索引、图状态测试、知识库质量测试、接口 smoke |
-| 内容质量 | DeepEval 多轮会话指标，检查角色一致性、轮次相关性、客服安全与处理完整度 |
-| 智能体性能 | 50 条用例端到端请求，统计路由、状态、意图、禁用承诺、耗时和错误率 |
+## 当前边界
 
-最新本地报告显示：测试集 50 条，接口 smoke 12/12 通过，契约通过率 96.00%，路由准确率 98.00%，状态准确率 98.00%，意图准确率 100.00%，禁用承诺通过率 100.00%，错误率 0.00%。DeepEval 本地运行结果为 39 通过 / 11 未通过，未通过项主要用于定位个别话术完整度、轮次相关性和测试契约对齐问题。
-
-详细材料：
-
-- [`docs/customer-service-agent-evaluation-report.md`](./docs/customer-service-agent-evaluation-report.md)
-- [`docs/customer-service-agent-evaluation-rules-explanation.md`](./docs/customer-service-agent-evaluation-rules-explanation.md)
-- [`docs/DEEPEVAL-EVALUATION.md`](./docs/DEEPEVAL-EVALUATION.md)
-
-## 主要目录
-
-- `app/`：Next.js 页面和 API routes。
-- `lib/agent/`：Agent graph 编排与节点逻辑。
-- `lib/rag/`：RAG Service、检索、向量索引、规则读取。
-- `knowledge/`：普通客服知识与售后规则源。
-- `data/knowledge-index.json`：本地构建的知识索引。
-- `scripts/`：索引构建、smoke test、知识库质量测试、DeepEval 数据集生成、性能统计和报告生成。
-- `tests/evals/`：DeepEval 多轮客服会话测试集和指标代码。
-- `docs/`：架构、RAG adapter、DeepSeek API 接入说明和评测报告。
-
-## 运行约束
-
-- MVP 不接真实订单、物流、退款、支付、仓储或客服系统。
-- 客户可见回复不得承诺退款、赔付、补发、审核通过或最终责任判定。
-- 普通客服检索仅使用 `knowledgeBase=general`；售后检索仅使用 `knowledgeBase=after_sales`。
-- 当前评测用于阶段性质量背书，不代表第三方认证或生产 SLA。
+- 当前项目是单一 3C 商品场景的智能客服演示，不是完整生产客服平台。
+- 不连接真实订单、支付、退款、仓储、物流或 CRM 系统。
+- 客户可见回复不得承诺退款、赔付、补发、审核通过或最终责任结论。
+- 当前暂停图片证据链分析，优先基于文字描述、订单信息、平台记录和人工转接处理。
+- 高风险或争议场景应使用保守话术，并转人工继续核实。
